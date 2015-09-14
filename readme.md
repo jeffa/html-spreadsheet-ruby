@@ -1,6 +1,6 @@
 Spreadsheet-HTML (ruby)
 =======================
-Just another HTML table generato for ruby.
+Just another HTML table generator for ruby.
 
 Description
 -----------
