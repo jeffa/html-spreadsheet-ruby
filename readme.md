@@ -1,6 +1,6 @@
-Spreadsheet::HTML (Ruby)
-========================
-Just another HTML table generator.
+Spreadsheet-HTML (ruby)
+=======================
+Just another HTML table generato for ruby.
 
 Description
 -----------
@@ -23,7 +23,6 @@ rake test
 rake build
 rake install
 ```
-
 
 License and Copyright
 ---------------------
