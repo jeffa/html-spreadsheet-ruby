@@ -10,7 +10,7 @@ module Spreadsheet
             data.each do |row|
                 cdata += '<tr>'
                 row.each do |col|
-                    cdata += '<td>' + col + '</td>'
+                    cdata += "<td>#{col}</td>"
                 end
                 cdata += '</tr>'
             end
