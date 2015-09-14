@@ -14,4 +14,4 @@ Synopsis
 
 License and Copyright
 ---------------------
-See [License](license.md).
+See [License](License.md).
