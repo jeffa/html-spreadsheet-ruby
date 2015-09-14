@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["info@unlocalhost.com"]
   spec.description   = %q{Just another HTML table generator}
   spec.summary       = %q{Generate HTML tables with ease (HTML4, XHTML and HTML5).}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/jeffa/spreadsheet-html-ruby"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
