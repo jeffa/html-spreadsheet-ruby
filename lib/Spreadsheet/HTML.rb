@@ -3,8 +3,12 @@ require "Spreadsheet/HTML/version"
 module Spreadsheet
     class HTML
 
-        def generate( data )
+        def generate( *args )
+            data = _process( *args )
+            return _make_table( data )
+        end
 
+        def _make_table( data )
             cdata = '<table>'
 
             data.each do |row|
@@ -17,6 +21,15 @@ module Spreadsheet
 
             cdata += '/<table>'
             return cdata
+        end
+
+        def _process( *args )
+            data = _args( *args )
+            return data
+        end
+
+        def _args( *args )
+           return args[0] 
         end
 
     end
