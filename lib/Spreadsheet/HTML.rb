@@ -4,6 +4,9 @@ module Spreadsheet
     class HTML
 
         def initialize( *args )
+            args.each do |key,val|
+                puts "key = #{key}\nval = #{val}\n"
+            end
             @data = Array[[1,'a'], [2,'b']]
         end
 
