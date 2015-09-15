@@ -5,9 +5,6 @@ module Spreadsheet
 
         def initialize( *args )
             @data = Array[[1,'a'], [2,'b']]
-            args.each do |key,val|
-                @data = val if key == 'data'
-            end
         end
 
         def generate( *args )
@@ -33,7 +30,6 @@ module Spreadsheet
 
         def _process( args )
             params = _args( args )
-            params['data'] = @data if !params['data']
             return params
         end
 
@@ -50,19 +46,27 @@ module Spreadsheet
                     if things[0].kind_of?(Array)
                         data.push( things.shift() )
                     else
-                        args.push( things.shift(), things.shift() )
+                        args.push( things.shift() ) if !things.empty?
+                        args.push( things.shift() ) if !things.empty?
                     end
                 else
-                    args.push( things.shift(), things.shift() )
+                    args.push( things.shift() ) if !things.empty?
+                    args.push( things.shift() ) if !things.empty?
                 end
 
             end
 
-#$data ||= (@data == 1) ? $data[0] : (@data) ? [ @data ] : undef;
+            if args[0]
+                args[0].each do |key,val|
+                    params[key] = val
+                end
+            end
 
-            params['data'] = data[0]
-            args.each do |key,val|
-                params[key] = val
+            if !params['data'] and data[0].kind_of?(Array)
+                data = [ data ] if !data[0][0].kind_of?(Array)
+                params['data'] = data[0]
+            elsif !@data.empty?
+                params['data'] = @data
             end
 
             return params
