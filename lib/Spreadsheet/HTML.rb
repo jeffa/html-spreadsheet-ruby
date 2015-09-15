@@ -4,10 +4,10 @@ module Spreadsheet
     class HTML
 
         def initialize( *args )
-            args.each do |key,val|
-                puts "key = #{key}\nval = #{val}\n"
+            @data = []
+            if args[0]
+                @data = args[0]['data']
             end
-            @data = Array[[1,'a'], [2,'b']]
         end
 
         def generate( *args )
