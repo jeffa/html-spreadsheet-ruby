@@ -6,7 +6,10 @@ module Spreadsheet
         def initialize( *args )
             @data = []
             if args[0]
-                @data = args[0]['data']
+                args[0].each do |key,val|
+                    self.instance_eval { class << self; self end }.send(:attr_accessor, key)
+                    self.send( "#{key}=", val )
+                end  
             end
         end
 
