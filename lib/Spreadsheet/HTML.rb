@@ -21,7 +21,8 @@ module Spreadsheet
             data  = params['data']
             cdata = '<table>'
 
-            tag = 'th'
+            tag = params['matrix'] ? 'td' : 'th'
+
             data.each do |row|
                 cdata += '<tr>'
                 row.each do |col|
@@ -68,11 +69,13 @@ module Spreadsheet
                 end
             end
 
+            self.instance_variables.each do |attr|
+                params[attr[1..-1]] = self.instance_variable_get attr
+            end
+
             if !params['data'] and data[0].kind_of?(Array)
                 data = [ data ] if !data[0][0].kind_of?(Array)
                 params['data'] = data[0]
-            elsif @data and !@data.empty?
-                params['data'] = @data
             end
 
             return params
