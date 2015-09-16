@@ -21,12 +21,14 @@ module Spreadsheet
             data  = params['data']
             cdata = '<table>'
 
+            tag = 'th'
             data.each do |row|
                 cdata += '<tr>'
                 row.each do |col|
-                    cdata += "<td>#{col}</td>"
+                    cdata += "<#{tag}>#{col}</#{tag}>"
                 end
                 cdata += '</tr>'
+                tag = 'td'
             end
 
             cdata += '/<table>'
