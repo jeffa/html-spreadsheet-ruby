@@ -4,7 +4,6 @@ module Spreadsheet
     class HTML
 
         def initialize( *args )
-            @data = []
             if args[0]
                 args[0].each do |key,val|
                     self.instance_eval { class << self; self end }.send(:attr_accessor, key)
@@ -43,8 +42,6 @@ module Spreadsheet
 
             data   = []
             args   = []
-            params = {}
-
             while !things.empty?
 
                 if things[0].kind_of?(Array)
@@ -62,6 +59,7 @@ module Spreadsheet
 
             end
 
+            params = {}
             if args[0]
                 args[0].each do |key,val|
                     params[key] = val
@@ -71,7 +69,7 @@ module Spreadsheet
             if !params['data'] and data[0].kind_of?(Array)
                 data = [ data ] if !data[0][0].kind_of?(Array)
                 params['data'] = data[0]
-            elsif !@data.empty?
+            elsif @data and !@data.empty?
                 params['data'] = @data
             end
 

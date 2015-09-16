@@ -9,6 +9,12 @@ class Test_Run < Test::Unit::TestCase
 
     assert_equal(
         '<table><tr><td>1</td><td>a</td></tr><tr><td>2</td><td>b</td></tr>/<table>',
+        Spreadsheet::HTML.new( 'data' => data ).generate(),
+        "via constructor"
+    )
+
+    assert_equal(
+        '<table><tr><td>1</td><td>a</td></tr><tr><td>2</td><td>b</td></tr>/<table>',
         Spreadsheet::HTML.new.generate( [1,'a'], [2,'b'] ),
         "two array refs"
     )
@@ -23,12 +29,6 @@ class Test_Run < Test::Unit::TestCase
         '<table><tr><td>1</td><td>a</td></tr><tr><td>2</td><td>b</td></tr>/<table>',
         Spreadsheet::HTML.new.generate( 'data' => data ),
         "one named arg"
-    )
-
-    assert_equal(
-        '<table><tr><td>1</td><td>a</td></tr><tr><td>2</td><td>b</td></tr>/<table>',
-        Spreadsheet::HTML.new( 'data' => data ).generate(),
-        "via constructor"
     )
 
   end
