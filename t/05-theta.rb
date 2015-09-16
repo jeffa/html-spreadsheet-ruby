@@ -1,9 +1,9 @@
 require "test/unit"
 require "Spreadsheet/HTML.rb"
 
-class Test_Matrix < Test::Unit::TestCase
+class Test_Theta < Test::Unit::TestCase
 
-  def test_matrix
+  def test_theta
 
     data = Array[[1,'a'], [2,'b'], [3,'c']]
 

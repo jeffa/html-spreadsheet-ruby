@@ -6,7 +6,7 @@ module Spreadsheet
         def generate( *args )
             params = _process( args )
 
-            if !params['theta']             # north
+            if !params['theta']           # north
 
             elsif params['theta'] == -90
 
@@ -35,34 +35,35 @@ module Spreadsheet
         end
 
         def _make_table( params )
-            cdata = '<table>'
+            table = '<table>'
 
             params['data'].each do |row|
-                cdata += '<tr>'
+                table += '<tr>'
                 row.each do |col|
-                    cdata += '<' + col['tag'] + '>' + col['cdata'] + '</' + col['tag'] + '>'
+                    table += '<' + col['tag'] + '>' + col['cdata'] + '</' + col['tag'] + '>'
                 end
-                cdata += '</tr>'
+                table += '</tr>'
                 tag = 'td'
             end
 
-            cdata += '</table>'
-            return cdata
+            table += '</table>'
+            return table
         end
 
         def _process( args )
             params = _args( args )
-            tag    = ( params['matrix'] or params['headless'] ) ? 'td' : 'th'
 
             params['data'].shift if params['headless']
 
             data = []
-            params['data'].each_with_index do |r,rindex|
-                row = []
-                r.each_with_index do |c,cindex|
-                    row.push( { 'tag' => tag, 'cdata' => c.to_s } )
+            tag  = ( params['matrix'] or params['headless'] ) ? 'td' : 'th'
+
+            params['data'].each_with_index do |row|
+                r = []
+                row.each_with_index do |col|
+                    r.push( { 'tag' => tag, 'cdata' => col.to_s } )
                 end
-                data.push( row )
+                data.push( r )
                 tag = 'td'
             end
             params['data'] = data
