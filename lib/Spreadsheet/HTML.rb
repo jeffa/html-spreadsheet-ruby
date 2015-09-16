@@ -3,6 +3,29 @@ require "Spreadsheet/HTML/version"
 module Spreadsheet
     class HTML
 
+        def generate( *args )
+            params = _process( args )
+
+            if !params['theta']             # north
+
+            elsif params['theta'] == -90
+
+            elsif params['theta'] == 90   # east
+
+            elsif params['theta'] == -180 # south
+
+            elsif params['theta'] == 180
+
+            elsif params['theta'] == -270 # west
+                # have to first build elements and rotate THOSE, not just the CDATA
+                #params['data'] = params['data'].transpose
+            elsif params['theta'] == 270
+
+            end
+
+            return _make_table( params )
+        end
+
         def initialize( *args )
             if args[0]
                 args[0].each do |key,val|
@@ -10,11 +33,6 @@ module Spreadsheet
                     self.send( "#{key}=", val )
                 end
             end
-        end
-
-        def generate( *args )
-            params = _process( args )
-            return _make_table( params )
         end
 
         def _make_table( params )
@@ -30,7 +48,7 @@ module Spreadsheet
                 tag = 'td'
             end
 
-            cdata += '/<table>'
+            cdata += '</table>'
             return cdata
         end
 
