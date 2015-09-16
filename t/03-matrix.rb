@@ -9,8 +9,14 @@ class Test_Matrix < Test::Unit::TestCase
 
     assert_equal(
         '<table><tr><td>1</td><td>a</td></tr><tr><td>2</td><td>b</td></tr>/<table>',
+        Spreadsheet::HTML.new( 'data' => data, 'matrix' => 1 ).generate(),
+        "via constructor only"
+    )
+
+    assert_equal(
+        '<table><tr><td>1</td><td>a</td></tr><tr><td>2</td><td>b</td></tr>/<table>',
         Spreadsheet::HTML.new( 'data' => data ).generate( 'matrix' => 1 ),
-        "via constructor"
+        "via constructor and method"
     )
 
     assert_equal(
