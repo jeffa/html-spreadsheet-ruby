@@ -17,8 +17,7 @@ module Spreadsheet
             elsif params['theta'] == 180
 
             elsif params['theta'] == -270 # west
-                # have to first build elements and rotate THOSE, not just the CDATA
-                #params['data'] = params['data'].transpose
+                params['data'] = params['data'].transpose
             elsif params['theta'] == 270
 
             end
@@ -37,12 +36,11 @@ module Spreadsheet
 
         def _make_table( params )
             cdata = '<table>'
-            tag   = ( params['matrix'] or params['headless'] ) ? 'td' : 'th'
 
             params['data'].each do |row|
                 cdata += '<tr>'
                 row.each do |col|
-                    cdata += "<#{tag}>#{col}</#{tag}>"
+                    cdata += '<' + col['tag'] + '>' + col['cdata'] + '</' + col['tag'] + '>'
                 end
                 cdata += '</tr>'
                 tag = 'td'
@@ -54,7 +52,21 @@ module Spreadsheet
 
         def _process( args )
             params = _args( args )
+            tag    = ( params['matrix'] or params['headless'] ) ? 'td' : 'th'
+
             params['data'].shift if params['headless']
+
+            data = []
+            params['data'].each_with_index do |r,rindex|
+                row = []
+                r.each_with_index do |c,cindex|
+                    row.push( { 'tag' => tag, 'cdata' => c.to_s } )
+                end
+                data.push( row )
+                tag = 'td'
+            end
+            params['data'] = data
+
             return params
         end
 
