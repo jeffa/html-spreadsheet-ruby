@@ -14,9 +14,6 @@ module Spreadsheet
 
         def generate( *args )
             params = _process( args )
-
-            params['data'].shift if params['headless']
-
             return _make_table( params )
         end
 
@@ -39,6 +36,7 @@ module Spreadsheet
 
         def _process( args )
             params = _args( args )
+            params['data'].shift if params['headless']
             return params
         end
 
