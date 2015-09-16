@@ -26,11 +26,9 @@ module Spreadsheet
         end
 
         def initialize( *args )
-            if args[0]
-                args[0].each do |key,val|
-                    self.instance_eval { class << self; self end }.send(:attr_accessor, key)
-                    self.send( "#{key}=", val )
-                end
+            (args[0] || []).each do |key,val|
+                self.instance_eval { class << self; self end }.send(:attr_accessor, key)
+                self.send( "#{key}=", val )
             end
         end
 
@@ -93,10 +91,8 @@ module Spreadsheet
             end
 
             params = {}
-            if args[0]
-                args[0].each do |key,val|
-                    params[key] = val
-                end
+            (args[0] || []).each do |key,val|
+                params[key] = val
             end
 
             self.instance_variables.each do |attr|
