@@ -15,18 +15,20 @@ module Spreadsheet
             end
 
             if !params['theta']           # north
-                params['data'] = params['flip'] ? params['data'].map {|a| a.reverse } : params['data']
+                if params['flip']
+                    params['data'] = params['data'].map {|a| a.reverse }
+                end
 
             elsif params['theta'] == 90   # east
                 if params['pinhead'] and !params['headless']
-                    params['data'] = params['data'].transpose.map{|a| a.push( a.pop ) }
+                    params['data'] = params['data'].transpose.map{|a| a.push( a.shift ) }
                 else
                     params['data'] = params['data'].transpose.map{|a| a.reverse }
                 end
 
             elsif params['theta'] == -90
                 if params['pinhead'] and !params['headless']
-                    params['data'] = params['data'].transpose.reverse.map {|a| a.push( a.pop ) } 
+                    params['data'] = params['data'].transpose.reverse.map {|a| a.push( a.shift ) } 
                 else
                     params['data'] = params['data'].transpose.reverse.map {|a| a.reverse }
                 end
