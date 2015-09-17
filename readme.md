@@ -20,14 +20,12 @@ Installation
 ------------
 We are currently pre-Alpha, so installation is not recommended.
 Also, bundler and test-unit are required, which is not awesome.
-```
-gem install bundler
-gem install test-unit
 
-rake test
-rake build
+* gem install bundler
+* gem install test-unit
+* rake test
+* rake build
 * ~~rake install~~ :skull:
-```
 
 License and Copyright
 ---------------------
