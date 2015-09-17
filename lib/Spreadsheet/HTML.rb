@@ -35,14 +35,14 @@ module Spreadsheet
 
             elsif params['theta'] == 180
                 if params['pinhead'] and !params['headless']
-#                    ? [ map [ reverse @$_ ], @{ $args{data} }[1 .. $#{ $args{data} }], $args{data}[0] ]
+                    params['data'] = params['data'].push( params['data'].shift ).map {|a| a.reverse }
                 else
                     params['data'] = params['data'].reverse.map {|a| a.reverse }
                 end
 
             elsif params['theta'] == -180 # south
                 if params['pinhead'] and !params['headless']
-#                    ? [ @{ $args{data} }[1 .. $#{ $args{data} }], $args{data}[0] ]
+                    params['data'] = params['data'].push( params['data'].shift )
                 else
                     params['data'] = params['data'].reverse
                 end
