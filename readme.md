@@ -18,10 +18,15 @@ puts generator.generate( Array[ [1,2,3], [4,5,6] ] )
 
 Installation
 ------------
+We are currently pre-Alpha, so installation is not recommended.
+Also, bundler and test-unit are required, which is not awesome.
 ```
+gem install bundler
+gem install test-unit
+
 rake test
 rake build
-rake install
+* ~~rake install~~ :skull:
 ```
 
 License and Copyright
