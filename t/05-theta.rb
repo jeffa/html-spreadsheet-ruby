@@ -388,4 +388,31 @@ class Test_Theta < Test::Unit::TestCase
 
   end
 
+  def test_flip
+
+    data = Array[
+        %w(header1 header2 header3 header4 ),
+        %w(foo1 bar1 baz1 qux1),
+        %w(foo2 bar2 baz2 qux2),
+        %w(foo3 bar3 baz3 qux3),
+        %w(foo4 bar4 baz4 qux4)
+    ]
+
+    assert_equal(
+        Spreadsheet::HTML.new( 'data' => data, 'theta' => 90 ).generate(),
+        Spreadsheet::HTML.new( 'data' => data, 'theta' => -90, 'flip' => 1 ).generate(),
+        "90"
+    )
+    assert_equal(
+        Spreadsheet::HTML.new( 'data' => data, 'theta' => 180 ).generate(),
+        Spreadsheet::HTML.new( 'data' => data, 'theta' => -180, 'flip' => 1 ).generate(),
+        "180"
+    )
+    assert_equal(
+        Spreadsheet::HTML.new( 'data' => data, 'theta' => 270 ).generate(),
+        Spreadsheet::HTML.new( 'data' => data, 'theta' => -270, 'flip' => 1 ).generate(),
+        "270"
+    )
+  end
+
 end
