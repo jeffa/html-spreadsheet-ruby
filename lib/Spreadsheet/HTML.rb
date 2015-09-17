@@ -56,9 +56,9 @@ module Spreadsheet
             data = []
             tag  = ( params['matrix'] or params['headless'] ) ? 'td' : 'th'
 
-            params['data'].each_with_index do |row|
+            params['data'].each do |row|
                 r = []
-                row.each_with_index do |col|
+                row.each do |col|
                     r.push( { 'tag' => tag, 'cdata' => col.to_s } )
                 end
                 data.push( r )
