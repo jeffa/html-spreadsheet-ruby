@@ -3,6 +3,10 @@ require "Spreadsheet/HTML/version"
 module Spreadsheet
     class HTML
 
+        def self.gen( *args )
+            self.new.generate( *args )
+        end
+
         def generate( *args )
             params = _process( args )
 
@@ -16,9 +20,10 @@ module Spreadsheet
 
             elsif params['theta'] == 180
 
+            elsif params['theta'] == 270
+
             elsif params['theta'] == -270 # west
                 params['data'] = params['data'].transpose
-            elsif params['theta'] == 270
 
             end
 

@@ -3,37 +3,65 @@ require "Spreadsheet/HTML.rb"
 
 class Test_Headless < Test::Unit::TestCase
 
-  def test_headless
+  def test_instance
 
     data = Array[[1,'a'], [2,'b'], [3,'c']]
+    html = '<table><tr><td>2</td><td>b</td></tr><tr><td>3</td><td>c</td></tr></table>'
 
     assert_equal(
-        '<table><tr><td>2</td><td>b</td></tr><tr><td>3</td><td>c</td></tr></table>',
+        html,
         Spreadsheet::HTML.new( 'data' => data, 'headless' => 1 ).generate( 'headless' => 1 ),
         "via constructor only"
     )
 
     assert_equal(
-        '<table><tr><td>2</td><td>b</td></tr><tr><td>3</td><td>c</td></tr></table>',
+        html,
         Spreadsheet::HTML.new( 'data' => data ).generate( 'headless' => 1 ),
         "via constructor and method"
     )
 
+    gen = Spreadsheet::HTML.new
+
     assert_equal(
-        '<table><tr><td>2</td><td>b</td></tr><tr><td>3</td><td>c</td></tr></table>',
-        Spreadsheet::HTML.new.generate( [1,'a'], [2,'b'], [3,'c'], 'headless' => 1  ),
+        html,
+        gen.generate( [1,'a'], [2,'b'], [3,'c'], 'headless' => 1  ),
         "two array refs"
     )
 
     assert_equal(
-        '<table><tr><td>2</td><td>b</td></tr><tr><td>3</td><td>c</td></tr></table>',
-        Spreadsheet::HTML.new.generate( data, 'headless' => 1  ),
+        html,
+        gen.generate( data, 'headless' => 1  ),
         "one array ref"
     )
 
     assert_equal(
-        '<table><tr><td>2</td><td>b</td></tr><tr><td>3</td><td>c</td></tr></table>',
-        Spreadsheet::HTML.new.generate( 'data' => data, 'headless' => 1  ),
+        html,
+        gen.generate( 'data' => data, 'headless' => 1  ),
+        "one named arg"
+    )
+
+  end
+
+  def test_class
+
+    data = Array[[1,'a'], [2,'b'], [3,'c']]
+    html = '<table><tr><td>2</td><td>b</td></tr><tr><td>3</td><td>c</td></tr></table>'
+
+    assert_equal(
+        html,
+        Spreadsheet::HTML.gen( [1,'a'], [2,'b'], [3,'c'], 'headless' => 1  ),
+        "two array refs"
+    )
+
+    assert_equal(
+        html,
+        Spreadsheet::HTML.gen( data, 'headless' => 1  ),
+        "one array ref"
+    )
+
+    assert_equal(
+        html,
+        Spreadsheet::HTML.gen( 'data' => data, 'headless' => 1  ),
         "one named arg"
     )
 
