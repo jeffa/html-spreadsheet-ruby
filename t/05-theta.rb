@@ -48,7 +48,7 @@ class Test_Theta < Test::Unit::TestCase
         %w(foo4 bar4 baz4 qux4)
     ]
 
-    html = '<table><tr><th>header1</th><th>header2</th><th>header3</th><th>header4</th></tr><tr><td>foo1</td><td>bar1</td><td>baz1</td><td>qux1</td></tr><tr><td>foo2</td><td>bar2</td><td>baz2</td><td>qux2</td></tr><tr><td>foo3</td><td>bar3</td><td>baz3</td><td>qux3</td></tr><tr><td>foo4</td><td>bar4</td><td>baz4</td><td>qux4</td></tr></table>';
+    html = '<table><tr><td>foo4</td><td>foo3</td><td>foo2</td><td>foo1</td><th>header1</th></tr><tr><td>bar4</td><td>bar3</td><td>bar2</td><td>bar1</td><th>header2</th></tr><tr><td>baz4</td><td>baz3</td><td>baz2</td><td>baz1</td><th>header3</th></tr><tr><td>qux4</td><td>qux3</td><td>qux2</td><td>qux1</td><th>header4</th></tr></table>';
 
     assert_equal(
         html,
@@ -83,7 +83,7 @@ class Test_Theta < Test::Unit::TestCase
         %w(foo4 bar4 baz4 qux4)
     ]
 
-    html = '<table><tr><th>header1</th><th>header2</th><th>header3</th><th>header4</th></tr><tr><td>foo1</td><td>bar1</td><td>baz1</td><td>qux1</td></tr><tr><td>foo2</td><td>bar2</td><td>baz2</td><td>qux2</td></tr><tr><td>foo3</td><td>bar3</td><td>baz3</td><td>qux3</td></tr><tr><td>foo4</td><td>bar4</td><td>baz4</td><td>qux4</td></tr></table>';
+    html = '<table><tr><td>qux4</td><td>qux3</td><td>qux2</td><td>qux1</td><th>header4</th></tr><tr><td>baz4</td><td>baz3</td><td>baz2</td><td>baz1</td><th>header3</th></tr><tr><td>bar4</td><td>bar3</td><td>bar2</td><td>bar1</td><th>header2</th></tr><tr><td>foo4</td><td>foo3</td><td>foo2</td><td>foo1</td><th>header1</th></tr></table>';
 
     assert_equal(
         html,
@@ -118,7 +118,7 @@ class Test_Theta < Test::Unit::TestCase
         %w(foo4 bar4 baz4 qux4)
     ]
 
-    html = '<table><tr><th>header1</th><th>header2</th><th>header3</th><th>header4</th></tr><tr><td>foo1</td><td>bar1</td><td>baz1</td><td>qux1</td></tr><tr><td>foo2</td><td>bar2</td><td>baz2</td><td>qux2</td></tr><tr><td>foo3</td><td>bar3</td><td>baz3</td><td>qux3</td></tr><tr><td>foo4</td><td>bar4</td><td>baz4</td><td>qux4</td></tr></table>';
+    html = '<table><tr><td>qux4</td><td>baz4</td><td>bar4</td><td>foo4</td></tr><tr><td>qux3</td><td>baz3</td><td>bar3</td><td>foo3</td></tr><tr><td>qux2</td><td>baz2</td><td>bar2</td><td>foo2</td></tr><tr><td>qux1</td><td>baz1</td><td>bar1</td><td>foo1</td></tr><tr><th>header4</th><th>header3</th><th>header2</th><th>header1</th></tr></table>';
 
     assert_equal(
         html,
@@ -153,7 +153,7 @@ class Test_Theta < Test::Unit::TestCase
         %w(foo4 bar4 baz4 qux4)
     ]
 
-    html = '<table><tr><th>header1</th><th>header2</th><th>header3</th><th>header4</th></tr><tr><td>foo1</td><td>bar1</td><td>baz1</td><td>qux1</td></tr><tr><td>foo2</td><td>bar2</td><td>baz2</td><td>qux2</td></tr><tr><td>foo3</td><td>bar3</td><td>baz3</td><td>qux3</td></tr><tr><td>foo4</td><td>bar4</td><td>baz4</td><td>qux4</td></tr></table>';
+    html = '<table><tr><td>foo4</td><td>bar4</td><td>baz4</td><td>qux4</td></tr><tr><td>foo3</td><td>bar3</td><td>baz3</td><td>qux3</td></tr><tr><td>foo2</td><td>bar2</td><td>baz2</td><td>qux2</td></tr><tr><td>foo1</td><td>bar1</td><td>baz1</td><td>qux1</td></tr><tr><th>header1</th><th>header2</th><th>header3</th><th>header4</th></tr></table>';
 
     assert_equal(
         html,

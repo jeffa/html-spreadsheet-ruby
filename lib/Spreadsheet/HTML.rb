@@ -10,30 +10,40 @@ module Spreadsheet
         def generate( *args )
             params = _process( args )
 
+            if params['theta'] and params['flip'] 
+                params['theta'] *= -1 
+            end
+
             if !params['theta']           # north
                 params['data'] = params['flip'] ? params['data'].map {|a| a.reverse } : params['data']
 
-            elsif params['theta'] == -90
-#                $args{data} = [ reverse @{ _transpose( $args{data} ) }];
-#                $args{data} = ($args{pinhead} and !$args{headless})
-#                    ? [ map [ @$_[1 .. $#$_], $_->[0] ], @{ $args{data} } ]
-#                    : [ map [ reverse @$_ ], @{ $args{data} } ];
-
             elsif params['theta'] == 90   # east
-#                $args{data} = _transpose( $args{data} );
-#                $args{data} = ($args{pinhead} and !$args{headless})
-#                    ? [ map [ @$_[1 .. $#$_], $_->[0] ], @{ $args{data} } ]
-#                    : [ map [ reverse @$_ ], @{ $args{data} } ];
+                if params['pinhead'] and !params['headless']
+                    params['data'] = params['data'].transpose.map{|a| a.push( a.pop ) }
+                else
+                    params['data'] = params['data'].transpose.map{|a| a.reverse }
+                end
 
-            elsif params['theta'] == -180 # south
-#                $args{data} = ($args{pinhead} and !$args{headless})
-#                    ? [ @{ $args{data} }[1 .. $#{ $args{data} }], $args{data}[0] ]
-#                    : [ reverse @{ $args{data} } ];
+            elsif params['theta'] == -90
+                if params['pinhead'] and !params['headless']
+                    params['data'] = params['data'].transpose.reverse.map {|a| a.push( a.pop ) } 
+                else
+                    params['data'] = params['data'].transpose.reverse.map {|a| a.reverse }
+                end
 
             elsif params['theta'] == 180
-#                $args{data} = ($args{pinhead} and !$args{headless})
+                if params['pinhead'] and !params['headless']
 #                    ? [ map [ reverse @$_ ], @{ $args{data} }[1 .. $#{ $args{data} }], $args{data}[0] ]
-#                    : [ map [ reverse @$_ ], reverse @{ $args{data} } ];
+                else
+                    params['data'] = params['data'].reverse.map {|a| a.reverse }
+                end
+
+            elsif params['theta'] == -180 # south
+                if params['pinhead'] and !params['headless']
+#                    ? [ @{ $args{data} }[1 .. $#{ $args{data} }], $args{data}[0] ]
+                else
+                    params['data'] = params['data'].reverse
+                end
 
             elsif params['theta'] == 270
                 params['data'] = params['data'].transpose.reverse
