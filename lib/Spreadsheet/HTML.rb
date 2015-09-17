@@ -11,16 +11,32 @@ module Spreadsheet
             params = _process( args )
 
             if !params['theta']           # north
+#                $args{data} = $args{flip} ? [ map [ CORE::reverse @$_ ], @{ $args{data} } ] : $args{data};
 
             elsif params['theta'] == -90
+#                $args{data} = [ CORE::reverse @{ _transpose( $args{data} ) }];
+#                $args{data} = ($args{pinhead} and !$args{headless})
+#                    ? [ map [ @$_[1 .. $#$_], $_->[0] ], @{ $args{data} } ]
+#                    : [ map [ CORE::reverse @$_ ], @{ $args{data} } ];
 
             elsif params['theta'] == 90   # east
+#                $args{data} = _transpose( $args{data} );
+#                $args{data} = ($args{pinhead} and !$args{headless})
+#                    ? [ map [ @$_[1 .. $#$_], $_->[0] ], @{ $args{data} } ]
+#                    : [ map [ CORE::reverse @$_ ], @{ $args{data} } ];
 
             elsif params['theta'] == -180 # south
+#                $args{data} = ($args{pinhead} and !$args{headless})
+#                    ? [ @{ $args{data} }[1 .. $#{ $args{data} }], $args{data}[0] ]
+#                    : [ CORE::reverse @{ $args{data} } ];
 
             elsif params['theta'] == 180
+#                $args{data} = ($args{pinhead} and !$args{headless})
+#                    ? [ map [ CORE::reverse @$_ ], @{ $args{data} }[1 .. $#{ $args{data} }], $args{data}[0] ]
+#                    : [ map [ CORE::reverse @$_ ], CORE::reverse @{ $args{data} } ];
 
             elsif params['theta'] == 270
+#                $args{data} = [ CORE::reverse @{ _transpose( $args{data} ) }];
 
             elsif params['theta'] == -270 # west
                 params['data'] = params['data'].transpose
