@@ -6,8 +6,8 @@ require 'Spreadsheet/HTML/version'
 Gem::Specification.new do |spec|
   spec.name          = "Spreadsheet-HTML"
   spec.version       = Spreadsheet::HTML::VERSION
-  spec.authors       = ["jeffa"]
-  spec.email         = ["info@unlocalhost.com"]
+  spec.authors       = ["Jeff Anderson"]
+  spec.email         = ["jeffa@cpan.org"]
   spec.description   = %q{Just another HTML table generator}
   spec.summary       = %q{Generate HTML tables with ease (HTML4, XHTML and HTML5).}
   spec.homepage      = "https://github.com/jeffa/spreadsheet-html-ruby"
@@ -20,4 +20,5 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
+  spec.add_development_dependency "HTML/AutoTag"
 end
