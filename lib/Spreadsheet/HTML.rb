@@ -1,4 +1,5 @@
 require "Spreadsheet/HTML/version"
+require "HTML/AutoTag"
 
 module Spreadsheet
     class HTML
