@@ -1,5 +1,5 @@
 require "test/unit"
-require "Spreadsheet/HTML.rb"
+require "HTML/Spreadsheet"
 
 class Test_Theta < Test::Unit::TestCase
 
@@ -17,22 +17,22 @@ class Test_Theta < Test::Unit::TestCase
 
     assert_equal(
         html,
-        Spreadsheet::HTML.new( 'data' => data, 'flip' => 1 ).generate(),
+        HTML::Spreadsheet.new( 'data' => data, 'flip' => 1 ).generate(),
         "via constructor only"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new( 'data' => data ).generate( 'flip' => 1 ),
+        HTML::Spreadsheet.new( 'data' => data ).generate( 'flip' => 1 ),
         "via constructor and method"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new.generate( data, 'flip' => 1 ),
+        HTML::Spreadsheet.new.generate( data, 'flip' => 1 ),
         "with array ref"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new.generate( 'data' => data, 'flip' => 1 ),
+        HTML::Spreadsheet.new.generate( 'data' => data, 'flip' => 1 ),
         "named args only"
     )
 
@@ -52,22 +52,22 @@ class Test_Theta < Test::Unit::TestCase
 
     assert_equal(
         html,
-        Spreadsheet::HTML.new( 'data' => data, 'theta' => 90 ).generate(),
+        HTML::Spreadsheet.new( 'data' => data, 'theta' => 90 ).generate(),
         "via constructor only"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new( 'data' => data ).generate( 'theta' => 90 ),
+        HTML::Spreadsheet.new( 'data' => data ).generate( 'theta' => 90 ),
         "via constructor and method"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new.generate( data, 'theta' => 90 ),
+        HTML::Spreadsheet.new.generate( data, 'theta' => 90 ),
         "with array ref"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new.generate( 'data' => data, 'theta' => 90 ),
+        HTML::Spreadsheet.new.generate( 'data' => data, 'theta' => 90 ),
         "named args only"
     )
 
@@ -87,22 +87,22 @@ class Test_Theta < Test::Unit::TestCase
 
     assert_equal(
         html,
-        Spreadsheet::HTML.new( 'data' => data, 'theta' => 90, 'pinhead' => 1 ).generate(),
+        HTML::Spreadsheet.new( 'data' => data, 'theta' => 90, 'pinhead' => 1 ).generate(),
         "via constructor only"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new( 'data' => data ).generate( 'theta' => 90, 'pinhead' => 1 ),
+        HTML::Spreadsheet.new( 'data' => data ).generate( 'theta' => 90, 'pinhead' => 1 ),
         "via constructor and method"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new.generate( data, 'theta' => 90, 'pinhead' => 1 ),
+        HTML::Spreadsheet.new.generate( data, 'theta' => 90, 'pinhead' => 1 ),
         "with array ref"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new.generate( 'data' => data, 'theta' => 90, 'pinhead' => 1 ),
+        HTML::Spreadsheet.new.generate( 'data' => data, 'theta' => 90, 'pinhead' => 1 ),
         "named args only"
     )
 
@@ -122,22 +122,22 @@ class Test_Theta < Test::Unit::TestCase
 
     assert_equal(
         html,
-        Spreadsheet::HTML.new( 'data' => data, 'theta' => -90 ).generate(),
+        HTML::Spreadsheet.new( 'data' => data, 'theta' => -90 ).generate(),
         "via constructor only"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new( 'data' => data ).generate( 'theta' => -90 ),
+        HTML::Spreadsheet.new( 'data' => data ).generate( 'theta' => -90 ),
         "via constructor and method"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new.generate( data, 'theta' => -90 ),
+        HTML::Spreadsheet.new.generate( data, 'theta' => -90 ),
         "with array ref"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new.generate( 'data' => data, 'theta' => -90 ),
+        HTML::Spreadsheet.new.generate( 'data' => data, 'theta' => -90 ),
         "named args only"
     )
 
@@ -157,22 +157,22 @@ class Test_Theta < Test::Unit::TestCase
 
     assert_equal(
         html,
-        Spreadsheet::HTML.new( 'data' => data, 'theta' => -90, 'pinhead' => 1 ).generate(),
+        HTML::Spreadsheet.new( 'data' => data, 'theta' => -90, 'pinhead' => 1 ).generate(),
         "via constructor only"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new( 'data' => data ).generate( 'theta' => -90, 'pinhead' => 1 ),
+        HTML::Spreadsheet.new( 'data' => data ).generate( 'theta' => -90, 'pinhead' => 1 ),
         "via constructor and method"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new.generate( data, 'theta' => -90, 'pinhead' => 1 ),
+        HTML::Spreadsheet.new.generate( data, 'theta' => -90, 'pinhead' => 1 ),
         "with array ref"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new.generate( 'data' => data, 'theta' => -90, 'pinhead' => 1 ),
+        HTML::Spreadsheet.new.generate( 'data' => data, 'theta' => -90, 'pinhead' => 1 ),
         "named args only"
     )
 
@@ -192,22 +192,22 @@ class Test_Theta < Test::Unit::TestCase
 
     assert_equal(
         html,
-        Spreadsheet::HTML.new( 'data' => data, 'theta' => 180 ).generate(),
+        HTML::Spreadsheet.new( 'data' => data, 'theta' => 180 ).generate(),
         "via constructor only"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new( 'data' => data ).generate( 'theta' => 180 ),
+        HTML::Spreadsheet.new( 'data' => data ).generate( 'theta' => 180 ),
         "via constructor and method"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new.generate( data, 'theta' => 180 ),
+        HTML::Spreadsheet.new.generate( data, 'theta' => 180 ),
         "with array ref"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new.generate( 'data' => data, 'theta' => 180 ),
+        HTML::Spreadsheet.new.generate( 'data' => data, 'theta' => 180 ),
         "named args only"
     )
 
@@ -227,22 +227,22 @@ class Test_Theta < Test::Unit::TestCase
 
     assert_equal(
         html,
-        Spreadsheet::HTML.new( 'data' => data, 'theta' => 180, 'pinhead' => 1 ).generate(),
+        HTML::Spreadsheet.new( 'data' => data, 'theta' => 180, 'pinhead' => 1 ).generate(),
         "via constructor only"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new( 'data' => data ).generate( 'theta' => 180, 'pinhead' => 1 ),
+        HTML::Spreadsheet.new( 'data' => data ).generate( 'theta' => 180, 'pinhead' => 1 ),
         "via constructor and method"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new.generate( data, 'theta' => 180, 'pinhead' => 1 ),
+        HTML::Spreadsheet.new.generate( data, 'theta' => 180, 'pinhead' => 1 ),
         "with array ref"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new.generate( 'data' => data, 'theta' => 180, 'pinhead' => 1 ),
+        HTML::Spreadsheet.new.generate( 'data' => data, 'theta' => 180, 'pinhead' => 1 ),
         "named args only"
     )
 
@@ -262,22 +262,22 @@ class Test_Theta < Test::Unit::TestCase
 
     assert_equal(
         html,
-        Spreadsheet::HTML.new( 'data' => data, 'theta' => -180 ).generate(),
+        HTML::Spreadsheet.new( 'data' => data, 'theta' => -180 ).generate(),
         "via constructor only"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new( 'data' => data ).generate( 'theta' => -180 ),
+        HTML::Spreadsheet.new( 'data' => data ).generate( 'theta' => -180 ),
         "via constructor and method"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new.generate( data, 'theta' => -180 ),
+        HTML::Spreadsheet.new.generate( data, 'theta' => -180 ),
         "with array ref"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new.generate( 'data' => data, 'theta' => -180 ),
+        HTML::Spreadsheet.new.generate( 'data' => data, 'theta' => -180 ),
         "named args only"
     )
 
@@ -297,22 +297,22 @@ class Test_Theta < Test::Unit::TestCase
 
     assert_equal(
         html,
-        Spreadsheet::HTML.new( 'data' => data, 'theta' => -180, 'pinhead' => 1 ).generate(),
+        HTML::Spreadsheet.new( 'data' => data, 'theta' => -180, 'pinhead' => 1 ).generate(),
         "via constructor only"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new( 'data' => data ).generate( 'theta' => -180, 'pinhead' => 1 ),
+        HTML::Spreadsheet.new( 'data' => data ).generate( 'theta' => -180, 'pinhead' => 1 ),
         "via constructor and method"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new.generate( data, 'theta' => -180, 'pinhead' => 1 ),
+        HTML::Spreadsheet.new.generate( data, 'theta' => -180, 'pinhead' => 1 ),
         "with array ref"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new.generate( 'data' => data, 'theta' => -180, 'pinhead' => 1 ),
+        HTML::Spreadsheet.new.generate( 'data' => data, 'theta' => -180, 'pinhead' => 1 ),
         "named args only"
     )
 
@@ -332,22 +332,22 @@ class Test_Theta < Test::Unit::TestCase
 
     assert_equal(
         html,
-        Spreadsheet::HTML.new( 'data' => data, 'theta' => 270 ).generate(),
+        HTML::Spreadsheet.new( 'data' => data, 'theta' => 270 ).generate(),
         "via constructor only"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new( 'data' => data ).generate( 'theta' => 270 ),
+        HTML::Spreadsheet.new( 'data' => data ).generate( 'theta' => 270 ),
         "via constructor and method"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new.generate( data, 'theta' => 270 ),
+        HTML::Spreadsheet.new.generate( data, 'theta' => 270 ),
         "with array ref"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new.generate( 'data' => data, 'theta' => 270 ),
+        HTML::Spreadsheet.new.generate( 'data' => data, 'theta' => 270 ),
         "named args only"
     )
 
@@ -367,22 +367,22 @@ class Test_Theta < Test::Unit::TestCase
 
     assert_equal(
         html,
-        Spreadsheet::HTML.new( 'data' => data, 'theta' => -270 ).generate(),
+        HTML::Spreadsheet.new( 'data' => data, 'theta' => -270 ).generate(),
         "via constructor only"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new( 'data' => data ).generate( 'theta' => -270 ),
+        HTML::Spreadsheet.new( 'data' => data ).generate( 'theta' => -270 ),
         "via constructor and method"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new.generate( data, 'theta' => -270 ),
+        HTML::Spreadsheet.new.generate( data, 'theta' => -270 ),
         "with array ref"
     )
     assert_equal(
         html,
-        Spreadsheet::HTML.new.generate( 'data' => data, 'theta' => -270 ),
+        HTML::Spreadsheet.new.generate( 'data' => data, 'theta' => -270 ),
         "named args only"
     )
 
@@ -399,18 +399,18 @@ class Test_Theta < Test::Unit::TestCase
     ]
 
     assert_equal(
-        Spreadsheet::HTML.new( 'data' => data, 'theta' => 90 ).generate(),
-        Spreadsheet::HTML.new( 'data' => data, 'theta' => -90, 'flip' => 1 ).generate(),
+        HTML::Spreadsheet.new( 'data' => data, 'theta' => 90 ).generate(),
+        HTML::Spreadsheet.new( 'data' => data, 'theta' => -90, 'flip' => 1 ).generate(),
         "90"
     )
     assert_equal(
-        Spreadsheet::HTML.new( 'data' => data, 'theta' => 180 ).generate(),
-        Spreadsheet::HTML.new( 'data' => data, 'theta' => -180, 'flip' => 1 ).generate(),
+        HTML::Spreadsheet.new( 'data' => data, 'theta' => 180 ).generate(),
+        HTML::Spreadsheet.new( 'data' => data, 'theta' => -180, 'flip' => 1 ).generate(),
         "180"
     )
     assert_equal(
-        Spreadsheet::HTML.new( 'data' => data, 'theta' => 270 ).generate(),
-        Spreadsheet::HTML.new( 'data' => data, 'theta' => -270, 'flip' => 1 ).generate(),
+        HTML::Spreadsheet.new( 'data' => data, 'theta' => 270 ).generate(),
+        HTML::Spreadsheet.new( 'data' => data, 'theta' => -270, 'flip' => 1 ).generate(),
         "270"
     )
   end

@@ -1,8 +1,8 @@
-require "Spreadsheet/HTML/version"
+require "HTML/Spreadsheet/version"
 require "HTML/AutoTag"
 
-module Spreadsheet
-    class HTML
+module HTML
+    class Spreadsheet
 
         def self.gen( *args )
             self.new.generate( *args )
@@ -125,6 +125,8 @@ module Spreadsheet
             end
 
             params = {}
+            auto = HTML::AutoTag.new( 'indent' => "  " )
+
             (args[0] || []).each do |key,val|
                 params[key] = val
             end
@@ -144,4 +146,5 @@ module Spreadsheet
         end
 
     end
+
 end

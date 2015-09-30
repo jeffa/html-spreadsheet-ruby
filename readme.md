@@ -1,4 +1,4 @@
-Spreadsheet-HTML (ruby)
+HTML-Spreadsheet (ruby)
 =======================
 Just another HTML table generator for ruby.
 
@@ -9,9 +9,9 @@ Generate HTML tables with ease (HTML4, XHTML and HTML5).
 Synopsis
 --------
 ```ruby
-require 'Spreadsheet/HTML'
+require 'HTML/Spreadsheet'
 
-generator = Spreadsheet::HTML.new
+generator = HTML::Spreadsheet.new
 
 puts generator.generate( Array[ [1,2,3], [4,5,6] ] )
 ```

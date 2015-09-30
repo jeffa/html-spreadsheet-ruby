@@ -1,5 +1,5 @@
-module Spreadsheet
-  class HTML
+module HTML
+  class Spreadsheet
     VERSION = "0.0.1"
   end
 end
