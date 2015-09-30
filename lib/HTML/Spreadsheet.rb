@@ -67,19 +67,9 @@ module HTML
         end
 
         def _make_table( params )
-            table = '<table>'
-
-            params['data'].each do |row|
-                table += '<tr>'
-                row.each do |col|
-                    table += '<' + col['tag'] + '>' + col['cdata'] + '</' + col['tag'] + '>'
-                end
-                table += '</tr>'
-                tag = 'td'
-            end
-
-            table += '</table>'
-            return table
+            cdata = [] # insert caption and colgroup
+            cdata.push( params['data'].map { |c| { 'tag' => 'tr', 'attr' => {}, 'cdata' => c } } )
+            return params['auto'].tag( 'tag' => 'table', 'attr' => {}, 'cdata' => cdata )
         end
 
         def _process( args )
@@ -125,8 +115,6 @@ module HTML
             end
 
             params = {}
-            auto = HTML::AutoTag.new( 'indent' => "  " )
-
             (args[0] || []).each do |key,val|
                 params[key] = val
             end
@@ -134,6 +122,13 @@ module HTML
             self.instance_variables.each do |attr|
                 params[attr[1..-1]] = self.instance_variable_get attr
             end
+
+            params['auto'] = HTML::AutoTag.new(
+                'encodes'   => params['encodes'],
+                'indent'    => params['indent'],
+                'level '    => params['level'],
+                'sorted'    => params['attr_sort'],
+            )
 
             if !params['data'] and data[0].kind_of?(Array)
                 data = [ data ] if !data[0][0].kind_of?(Array)
