@@ -1,6 +1,6 @@
 Spreadsheet-HTML (ruby)
 =======================
-[![Gem Version](https://badge.fury.io/rb/HTML-AutoTag.svg)](https://badge.fury.io/rb/HTML-AutoTag) Just another HTML table generator for ruby.
+Just another HTML table generator for ruby. [![Gem Version](https://badge.fury.io/rb/HTML-AutoTag.svg)](https://badge.fury.io/rb/HTML-AutoTag)
 
 Description
 -----------
