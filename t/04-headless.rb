@@ -1,5 +1,5 @@
 require "test/unit"
-require "HTML/Spreadsheet"
+require "Spreadsheet/HTML"
 
 class Test_Headless < Test::Unit::TestCase
 
@@ -10,17 +10,17 @@ class Test_Headless < Test::Unit::TestCase
 
     assert_equal(
         html,
-        HTML::Spreadsheet.new( 'data' => data, 'headless' => 1 ).generate( 'headless' => 1 ),
+        Spreadsheet::HTML.new( 'data' => data, 'headless' => 1 ).generate( 'headless' => 1 ),
         "via constructor only"
     )
 
     assert_equal(
         html,
-        HTML::Spreadsheet.new( 'data' => data ).generate( 'headless' => 1 ),
+        Spreadsheet::HTML.new( 'data' => data ).generate( 'headless' => 1 ),
         "via constructor and method"
     )
 
-    gen = HTML::Spreadsheet.new
+    gen = Spreadsheet::HTML.new
 
     assert_equal(
         html,
@@ -49,19 +49,19 @@ class Test_Headless < Test::Unit::TestCase
 
     assert_equal(
         html,
-        HTML::Spreadsheet.gen( [1,'a'], [2,'b'], [3,'c'], 'headless' => 1  ),
+        Spreadsheet::HTML.gen( [1,'a'], [2,'b'], [3,'c'], 'headless' => 1  ),
         "two array refs"
     )
 
     assert_equal(
         html,
-        HTML::Spreadsheet.gen( data, 'headless' => 1  ),
+        Spreadsheet::HTML.gen( data, 'headless' => 1  ),
         "one array ref"
     )
 
     assert_equal(
         html,
-        HTML::Spreadsheet.gen( 'data' => data, 'headless' => 1  ),
+        Spreadsheet::HTML.gen( 'data' => data, 'headless' => 1  ),
         "one named arg"
     )
 

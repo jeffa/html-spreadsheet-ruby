@@ -1,8 +1,14 @@
-require "HTML/Spreadsheet/version"
+require "Spreadsheet/HTML/version"
 require "HTML/AutoTag"
 
-module HTML
-    class Spreadsheet
+# i cannot hasa instantiate HTML::AutoTag inside Spreadsheet::HTML?!?
+module Auto
+    class Tag < HTML::AutoTag
+    end
+end
+
+module Spreadsheet
+    class HTML
 
         def self.gen( *args )
             self.new.generate( *args )
@@ -123,7 +129,7 @@ module HTML
                 params[attr[1..-1]] = self.instance_variable_get attr
             end
 
-            params['auto'] = HTML::AutoTag.new(
+            params['auto'] = Auto::Tag.new(
                 'encodes'   => params['encodes'],
                 'indent'    => params['indent'],
                 'level '    => params['level'],

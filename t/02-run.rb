@@ -1,5 +1,5 @@
 require "test/unit"
-require "HTML/Spreadsheet"
+require "Spreadsheet/HTML"
 
 class Test_Run < Test::Unit::TestCase
 
@@ -10,11 +10,11 @@ class Test_Run < Test::Unit::TestCase
 
     assert_equal(
         html,
-        HTML::Spreadsheet.new( 'data' => data ).generate(),
+        Spreadsheet::HTML.new( 'data' => data ).generate(),
         "via constructor"
     )
 
-    gen = HTML::Spreadsheet.new
+    gen = Spreadsheet::HTML.new
 
     assert_equal(
         html,
@@ -43,19 +43,19 @@ class Test_Run < Test::Unit::TestCase
 
     assert_equal(
         html,
-        HTML::Spreadsheet.gen( [1,'a'], [2,'b'] ),
+        Spreadsheet::HTML.gen( [1,'a'], [2,'b'] ),
         "two array refs"
     )
 
     assert_equal(
         html,
-        HTML::Spreadsheet.gen( data ),
+        Spreadsheet::HTML.gen( data ),
         "one array ref"
     )
 
     assert_equal(
         html,
-        HTML::Spreadsheet.gen( 'data' => data ),
+        Spreadsheet::HTML.gen( 'data' => data ),
         "one named arg"
     )
 

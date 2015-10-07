@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'HTML/Spreadsheet/version'
+require 'Spreadsheet/HTML/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "HTML-Spreadsheet"
-  spec.version       = HTML::Spreadsheet::VERSION
+  spec.name          = "Spreadsheet-HTML"
+  spec.version       = Spreadsheet::HTML::VERSION
   spec.authors       = ["jeffa"]
   spec.email         = ["jeffa@cpan.org"]
   spec.description   = %q{Just another HTML table generator}
   spec.summary       = %q{Generate HTML tables with ease (HTML4, XHTML and HTML5).}
-  spec.homepage      = "https://github.com/jeffa/html-spreadsheet-ruby"
+  spec.homepage      = "https://github.com/jeffa/spreadsheet-html-ruby"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

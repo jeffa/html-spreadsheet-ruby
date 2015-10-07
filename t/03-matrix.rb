@@ -1,5 +1,5 @@
 require "test/unit"
-require "HTML/Spreadsheet"
+require "Spreadsheet/HTML"
 
 class Test_Matrix < Test::Unit::TestCase
 
@@ -10,17 +10,17 @@ class Test_Matrix < Test::Unit::TestCase
 
     assert_equal(
         html,
-        HTML::Spreadsheet.new( 'data' => data, 'matrix' => 1 ).generate(),
+        Spreadsheet::HTML.new( 'data' => data, 'matrix' => 1 ).generate(),
         "via constructor only"
     )
 
     assert_equal(
         html,
-        HTML::Spreadsheet.new( 'data' => data ).generate( 'matrix' => 1 ),
+        Spreadsheet::HTML.new( 'data' => data ).generate( 'matrix' => 1 ),
         "via constructor and method"
     )
 
-    gen = HTML::Spreadsheet.new
+    gen = Spreadsheet::HTML.new
 
     assert_equal(
         html,
@@ -49,19 +49,19 @@ class Test_Matrix < Test::Unit::TestCase
 
     assert_equal(
         html,
-        HTML::Spreadsheet.gen( [1,'a'], [2,'b'], 'matrix' => 1  ),
+        Spreadsheet::HTML.gen( [1,'a'], [2,'b'], 'matrix' => 1  ),
         "two array refs"
     )
 
     assert_equal(
         html,
-        HTML::Spreadsheet.gen( data, 'matrix' => 1  ),
+        Spreadsheet::HTML.gen( data, 'matrix' => 1  ),
         "one array ref"
     )
 
     assert_equal(
         html,
-        HTML::Spreadsheet.gen( 'data' => data, 'matrix' => 1  ),
+        Spreadsheet::HTML.gen( 'data' => data, 'matrix' => 1  ),
         "one named arg"
     )
 
