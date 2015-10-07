@@ -132,7 +132,7 @@ module Spreadsheet
             params['auto'] = Auto::Tag.new(
                 'encodes'   => params['encodes'],
                 'indent'    => params['indent'],
-                'level '    => params['level'],
+                'level'     => params['level'],
                 'sorted'    => params['attr_sort'],
             )
 
