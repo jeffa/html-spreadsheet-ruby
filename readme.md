@@ -25,8 +25,6 @@ Installation
 ------------
 We are currently pre-Alpha, so installation is not recommended.
 
-* gem install bundler
-* gem install test-unit
 * rake test
 * rake build
 * ~~rake install~~ :skull:
