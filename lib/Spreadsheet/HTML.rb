@@ -24,8 +24,6 @@ module Spreadsheet
 
         def generate( *args )
             params = _process( args )
-            #puts params.inspect
-            #puts "\n\n"
 
             if params['theta'] and params['flip'] 
                 params['theta'] *= -1 
@@ -135,8 +133,10 @@ module Spreadsheet
                 params[attr[1..-1]] = self.instance_variable_get attr
             end
 
-            (args[0] || []).each do |key,val|
-                params[key] = val
+            (args || []).each do |hash|
+                hash.each do |key,val|
+                    params[key] = val
+                end
             end
 
             params['auto'] = Auto::Tag.new(
