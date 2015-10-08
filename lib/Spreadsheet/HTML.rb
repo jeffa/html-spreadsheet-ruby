@@ -14,8 +14,18 @@ module Spreadsheet
             self.new.generate( *args )
         end
 
+        def portrait( *args )
+            generate( *args, 'theta' => 0 )
+        end
+
+        def landscape( *args )
+            generate( *args, 'theta' => -270, 'tgroups' => 0 )
+        end
+
         def generate( *args )
             params = _process( args )
+            #puts params.inspect
+            #puts "\n\n"
 
             if params['theta'] and params['flip'] 
                 params['theta'] *= -1 
@@ -121,12 +131,12 @@ module Spreadsheet
             end
 
             params = {}
-            (args[0] || []).each do |key,val|
-                params[key] = val
-            end
-
             self.instance_variables.each do |attr|
                 params[attr[1..-1]] = self.instance_variable_get attr
+            end
+
+            (args[0] || []).each do |key,val|
+                params[key] = val
             end
 
             params['auto'] = Auto::Tag.new(
