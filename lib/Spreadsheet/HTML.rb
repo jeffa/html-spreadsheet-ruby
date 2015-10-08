@@ -98,8 +98,8 @@ module Spreadsheet
 
         def _make_table( params )
             cdata = [] # insert caption and colgroup
-            cdata.push( params['data'].map { |c| { 'tag' => 'tr', 'attr' => {}, 'cdata' => c } } )
-            return params['auto'].tag( 'tag' => 'table', 'attr' => {}, 'cdata' => cdata )
+            cdata.push( params['data'].map { |c| { 'tag' => 'tr', 'attr' => params['tr'], 'cdata' => c } } )
+            return params['auto'].tag( 'tag' => 'table', 'attr' => params['table'], 'cdata' => cdata )
         end
 
         def _process( args )
@@ -113,7 +113,7 @@ module Spreadsheet
             params['data'].each do |row|
                 r = []
                 row.each do |col|
-                    r.push( { 'tag' => tag, 'cdata' => col.to_s } )
+                    r.push( { 'tag' => tag, 'attr' => params[tag], 'cdata' => col.to_s } )
                 end
                 data.push( r )
                 tag = 'td'
