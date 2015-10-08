@@ -14,12 +14,28 @@ module Spreadsheet
             self.new.generate( *args )
         end
 
+        def
+            north( *args ) generate( *args, 'theta' => 0 )
+        end
+
         def portrait( *args )
             generate( *args, 'theta' => 0 )
         end
 
+        def west( *args )
+            generate( *args, 'theta' => -270, 'tgroups' => 0 )
+        end
+
         def landscape( *args )
             generate( *args, 'theta' => -270, 'tgroups' => 0 )
+        end
+
+        def east( *args )
+            generate( *args, 'theta' => 90, 'tgroups' => 0 )
+        end
+
+        def south( *args )
+            generate( *args, 'theta' => -180, 'tgroups' => 0 )
         end
 
         def generate( *args )
