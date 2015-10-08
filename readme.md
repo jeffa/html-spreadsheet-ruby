@@ -11,9 +11,14 @@ Synopsis
 ```ruby
 require 'Spreadsheet/HTML'
 
-generator = Spreadsheet::HTML.new
+data = Array[ [1,2,3], [4,5,6] ]
+generator = Spreadsheet::HTML.new()
+puts generator.generate( data )
+puts generator.generate( 'data' => data )
 
-puts generator.generate( Array[ [1,2,3], [4,5,6] ] )
+generator = Spreadsheet::HTML.new( 'data' => data )
+puts generator.portrait()
+puts generator.landscape()
 ```
 
 Installation
