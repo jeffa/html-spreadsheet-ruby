@@ -15,21 +15,21 @@ class Test_Attributes < Test::Unit::TestCase
 
     html = '<table class="spreadsheet"><tr><th>header1</th><th>header2</th><th>header3</th><th>header4</th></tr><tr><td>foo1</td><td>bar1</td><td>baz1</td><td>qux1</td></tr><tr><td>foo2</td><td>bar2</td><td>baz2</td><td>qux2</td></tr><tr><td>foo3</td><td>bar3</td><td>baz3</td><td>qux3</td></tr><tr><td>foo4</td><td>bar4</td><td>baz4</td><td>qux4</td></tr></table>'
 
-#    assert_equal(
-#        html,
-#        Spreadsheet::HTML.new( 'data' => data, 'table' => { 'class' => 'spreadsheet' } ).generate(),
-#        "via constructor only"
-#    )
-#    assert_equal(
-#        html,
-#        Spreadsheet::HTML.new().generate( 'data' => data, 'table' => { 'class' => 'spreadsheet' } ),
-#        "via method only"
-#    )
-#    assert_equal(
-#        html,
-#        Spreadsheet::HTML.new( 'data' => data ).generate( 'table' => { 'class' => 'spreadsheet' } ),
-#        "via constructor and method"
-#    )
+    assert_equal(
+        html,
+        Spreadsheet::HTML.new( 'data' => data, 'table' => { 'class' => 'spreadsheet' } ).generate(),
+        "via constructor only"
+    )
+    assert_equal(
+        html,
+        Spreadsheet::HTML.new().generate( 'data' => data, 'table' => { 'class' => 'spreadsheet' } ),
+        "via method only"
+    )
+    assert_equal(
+        html,
+        Spreadsheet::HTML.new( 'data' => data ).generate( 'table' => { 'class' => 'spreadsheet' } ),
+        "via constructor and method"
+    )
 
   end 
 
@@ -63,6 +63,35 @@ class Test_Attributes < Test::Unit::TestCase
 
   end 
 
+  def test_tr_rotate
+
+    data = Array[
+        %w(header1 header2 header3 header4),
+        %w(foo1 bar1 baz1 qux1),
+        %w(foo2 bar2 baz2 qux2),
+        %w(foo3 bar3 baz3 qux3),
+        %w(foo4 bar4 baz4 qux4)
+    ]
+
+    html = '<table><tr class="odd"><th>header1</th><th>header2</th><th>header3</th><th>header4</th></tr><tr class="even"><td>foo1</td><td>bar1</td><td>baz1</td><td>qux1</td></tr><tr class="odd"><td>foo2</td><td>bar2</td><td>baz2</td><td>qux2</td></tr><tr class="even"><td>foo3</td><td>bar3</td><td>baz3</td><td>qux3</td></tr><tr class="odd"><td>foo4</td><td>bar4</td><td>baz4</td><td>qux4</td></tr></table>'
+
+    assert_equal(
+        html,
+        Spreadsheet::HTML.new( 'data' => data, 'tr' => { 'class' => %w{ odd even } } ).generate(),
+        "via constructor only"
+    )
+    assert_equal(
+        html,
+        Spreadsheet::HTML.new().generate( 'data' => data, 'tr' => { 'class' => %w{ odd even } } ),
+        "via method only"
+    )
+    assert_equal(
+        html,
+        Spreadsheet::HTML.new( 'data' => data ).generate( 'tr' => { 'class' => %w{ odd even } } ),
+        "via constructor and method"
+    )
+
+  end 
   def test_th
 
     data = Array[
@@ -121,5 +150,35 @@ class Test_Attributes < Test::Unit::TestCase
         "via constructor and method"
     )
 
-    end
+  end
+
+  def test_td_rotate
+
+    data = Array[
+        %w(header1 header2 header3 header4),
+        %w(foo1 bar1 baz1 qux1),
+        %w(foo2 bar2 baz2 qux2),
+        %w(foo3 bar3 baz3 qux3),
+        %w(foo4 bar4 baz4 qux4)
+    ]
+
+    html = '<table><tr><th>header1</th><th>header2</th><th>header3</th><th>header4</th></tr><tr><td style="color: red;">foo1</td><td style="color: green;">bar1</td><td style="color: blue;">baz1</td><td style="color: red;">qux1</td></tr><tr><td style="color: green;">foo2</td><td style="color: blue;">bar2</td><td style="color: red;">baz2</td><td style="color: green;">qux2</td></tr><tr><td style="color: blue;">foo3</td><td style="color: red;">bar3</td><td style="color: green;">baz3</td><td style="color: blue;">qux3</td></tr><tr><td style="color: red;">foo4</td><td style="color: green;">bar4</td><td style="color: blue;">baz4</td><td style="color: red;">qux4</td></tr></table>'
+
+    assert_equal(
+        html,
+        Spreadsheet::HTML.new( 'data' => data, 'td' => { 'style' => { 'color' => %w{ red green blue } } } ).generate(),
+        "via constructor only"
+    )
+    assert_equal(
+        html,
+        Spreadsheet::HTML.new().generate( 'data' => data, 'td' => { 'style' => { 'color' => %w{ red green blue } } } ),
+        "via method only"
+    )
+    assert_equal(
+        html,
+        Spreadsheet::HTML.new( 'data' => data ).generate( 'td' => { 'style' => { 'color' => %w{ red green blue } } } ),
+        "via constructor and method"
+    )
+
+  end
 end
