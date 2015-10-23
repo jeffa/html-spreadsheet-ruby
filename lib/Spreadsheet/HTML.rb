@@ -97,8 +97,37 @@ module Spreadsheet
         end
 
         def _make_table( params )
-            cdata = [] # insert caption and colgroup
-            cdata.push( params['data'].map { |c| { 'tag' => 'tr', 'attr' => params['tr'], 'cdata' => c } } )
+            cdata = [] # TODO: insert caption and colgroup
+
+            if params['tgroups'] && params['tgroups'] > 0
+
+                body = params['data']
+                head = body.shift() unless params['matrix'] && data.size() > 2
+                foot = body.pop() if !params['matrix'] && params['tgroups'] > 1 and data.size() > 2
+
+                head_row  = { 'tag' => 'tr', 'attr' => params['thead.tr'], 'cdata' => head }
+                foot_row  = { 'tag' => 'tr', 'attr' => params['tfoot.tr'], 'cdata' => foot }
+                body_rows = body.map{ |r| { 'tag' => 'tr', 'attr' => params['tr'], 'cdata' => r } }
+
+                if params['group'] && params['group'] > 1
+#                    $body_rows = [
+#                        map [ @$body_rows[$_ .. $_ + $args{group} - 1] ],
+#                        _range( 0, $#$body_rows, $args{group} )
+#                    ];
+#                    pop @{ $body_rows->[-1] } while !defined $body_rows->[-1][-1];
+#
+                else
+                    body_rows = Array[ body_rows ]
+                end
+
+                cdata.push({ 'tag' => 'thead', 'attr' => params['thead'], 'cdata' => head_row }) if head
+                cdata.push({ 'tag' => 'tfoot', 'attr' => params['tfoot'], 'cdata' => foot_row }) if foot
+                cdata.push( body_rows.map{ |r| { 'tag' => 'tbody', 'attr' => params['tbody'], 'cdata' => Array[r] } })
+
+            else
+                cdata.push( params['data'].map { |c| { 'tag' => 'tr', 'attr' => params['tr'], 'cdata' => c } } )
+            end
+
             return params['auto'].tag( 'tag' => 'table', 'attr' => params['table'], 'cdata' => cdata )
         end
 
