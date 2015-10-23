@@ -14,8 +14,8 @@ module Spreadsheet
             self.new.generate( *args )
         end
 
-        def
-            north( *args ) generate( *args, 'theta' => 0 )
+        def north( *args )
+            generate( *args, 'theta' => 0 )
         end
 
         def portrait( *args )
