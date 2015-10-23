@@ -123,10 +123,17 @@ module Spreadsheet
         def _process( args )
             params = _args( args )
 
-            params['data'].shift if params['headless']
+            # headings is an alias for -r0
+            params['-r0'] = params['headings']
 
-            data = []
-            tag  = ( params['matrix'] or params['headless'] ) ? 'td' : 'th'
+            index = {}
+            if params['data'][0].size()
+                # implement index mapping
+            end
+
+            data  = []
+            empty = params.has_key?('empty') ? params['empty'] : '&nbsp'
+            tag   = ( params['matrix'] or params['headless'] ) ? 'td' : 'th'
 
             params['data'].each do |row|
                 r = []
@@ -136,7 +143,9 @@ module Spreadsheet
                 data.push( r )
                 tag = 'td'
             end
+
             params['data'] = data
+            params['data'].shift if params['headless']
 
             return params
         end
