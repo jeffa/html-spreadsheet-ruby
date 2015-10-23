@@ -31,11 +31,11 @@ module Spreadsheet
         end
 
         def east( *args )
-            generate( *args, 'theta' => 90, 'tgroups' => 0 )
+            generate( *args, 'theta' => 90, 'tgroups' => 0, 'pinhead' => 1 )
         end
 
         def south( *args )
-            generate( *args, 'theta' => -180, 'tgroups' => 0 )
+            generate( *args, 'theta' => -180, 'tgroups' => 0, 'pinhead' => 1 )
         end
 
         def generate( *args )
@@ -105,30 +105,19 @@ module Spreadsheet
                 head = body.shift() unless params['matrix'] && data.size() > 2
                 foot = body.pop() if !params['matrix'] && params['tgroups'] > 1 and data.size() > 2
 
-                head_row  = { 'tag' => 'tr', 'attr' => params['thead.tr'], 'cdata' => head }
-                foot_row  = { 'tag' => 'tr', 'attr' => params['tfoot.tr'], 'cdata' => foot }
-                body_rows = body.map{ |r| { 'tag' => 'tr', 'attr' => params['tr'], 'cdata' => r } }
+                head_row  = { 'tag' => 'tr', 'attr' => params['thead.tr'] || {}, 'cdata' => head }
+                foot_row  = { 'tag' => 'tr', 'attr' => params['tfoot.tr'] || {}, 'cdata' => foot }
+                body_rows = body.map{ |r| { 'tag' => 'tr', 'attr' => params['tr'] || {}, 'cdata' => r } }
 
-                if params['group'] && params['group'] > 1
-#                    $body_rows = [
-#                        map [ @$body_rows[$_ .. $_ + $args{group} - 1] ],
-#                        _range( 0, $#$body_rows, $args{group} )
-#                    ];
-#                    pop @{ $body_rows->[-1] } while !defined $body_rows->[-1][-1];
-#
-                else
-                    body_rows = Array[ body_rows ]
-                end
-
-                cdata.push({ 'tag' => 'thead', 'attr' => params['thead'], 'cdata' => head_row }) if head
-                cdata.push({ 'tag' => 'tfoot', 'attr' => params['tfoot'], 'cdata' => foot_row }) if foot
-                cdata.push( body_rows.map{ |r| { 'tag' => 'tbody', 'attr' => params['tbody'], 'cdata' => Array[r] } })
+                cdata.push({ 'tag' => 'thead', 'attr' => params['thead'] || {}, 'cdata' => head_row }) if head
+                cdata.push({ 'tag' => 'tfoot', 'attr' => params['tfoot'] || {}, 'cdata' => foot_row }) if foot
+                cdata.push({ 'tag' => 'tbody', 'attr' => params['tbody'] || {}, 'cdata' => body_rows })
 
             else
-                cdata.push( params['data'].map { |c| { 'tag' => 'tr', 'attr' => params['tr'], 'cdata' => c } } )
+                cdata.push( params['data'].map { |c| { 'tag' => 'tr', 'attr' => params['tr'] || {}, 'cdata' => c } } )
             end
 
-            return params['auto'].tag( 'tag' => 'table', 'attr' => params['table'], 'cdata' => cdata )
+            return params['auto'].tag( 'tag' => 'table', 'attr' => params['table'] || {}, 'cdata' => cdata )
         end
 
         def _process( args )
@@ -142,7 +131,7 @@ module Spreadsheet
             params['data'].each do |row|
                 r = []
                 row.each do |col|
-                    r.push( { 'tag' => tag, 'attr' => params[tag], 'cdata' => col.to_s } )
+                    r.push( { 'tag' => tag, 'attr' => params[tag] || {}, 'cdata' => col.to_s } )
                 end
                 data.push( r )
                 tag = 'td'

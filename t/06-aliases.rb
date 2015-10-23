@@ -243,33 +243,33 @@ class Test_Aliases < Test::Unit::TestCase
 
     assert_equal(
         Spreadsheet::HTML.new( 'data' => data ).east(),
-        Spreadsheet::HTML.new( 'data' => data, 'theta' => 90 ).generate(),
+        Spreadsheet::HTML.new( 'data' => data, 'theta' => 90, 'pinhead' => 1 ).generate(),
         "east is theta 90 via constructor and method"
     )
     assert_equal(
         Spreadsheet::HTML.new.east( data ),
-        Spreadsheet::HTML.new.generate( data, 'theta' => 90 ),
+        Spreadsheet::HTML.new.generate( data, 'theta' => 90, 'pinhead' => 1 ),
         "east is theta 90 with array ref"
     )
     assert_equal(
         Spreadsheet::HTML.new.east( 'data' => data ),
-        Spreadsheet::HTML.new.generate( 'data' => data, 'theta' => 90 ),
+        Spreadsheet::HTML.new.generate( 'data' => data, 'theta' => 90, 'pinhead' => 1 ),
         "east is theta 90 named args only"
     )
 
     assert_equal(
         Spreadsheet::HTML.new( 'data' => data ).south(),
-        Spreadsheet::HTML.new( 'data' => data, 'theta' => -180 ).generate(),
+        Spreadsheet::HTML.new( 'data' => data, 'theta' => -180, 'pinhead' => 1 ).generate(),
         "south is theta -180 via constructor and method"
     )
     assert_equal(
         Spreadsheet::HTML.new.south( data ),
-        Spreadsheet::HTML.new.generate( data, 'theta' => -180 ),
+        Spreadsheet::HTML.new.generate( data, 'theta' => -180, 'pinhead' => 1 ),
         "south is theta -180 with array ref"
     )
     assert_equal(
         Spreadsheet::HTML.new.south( 'data' => data ),
-        Spreadsheet::HTML.new.generate( 'data' => data, 'theta' => -180 ),
+        Spreadsheet::HTML.new.generate( 'data' => data, 'theta' => -180, 'pinhead' => 1 ),
         "south is theta -180 named args only"
     )
 
