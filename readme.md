@@ -19,15 +19,12 @@ puts generator.generate( 'data' => data )
 generator = Spreadsheet::HTML.new( 'data' => data )
 puts generator.portrait()
 puts generator.landscape()
+
 ```
 
 Installation
 ------------
-We are currently pre-Alpha, so installation is not recommended.
-
-* rake test
-* rake build
-* ~~rake install~~ :skull:
+* gem install Spreadsheet-HTML
 
 License and Copyright
 ---------------------
