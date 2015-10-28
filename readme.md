@@ -17,9 +17,13 @@ puts generator.generate( data )
 puts generator.generate( 'data' => data )
 
 generator = Spreadsheet::HTML.new( 'data' => data )
-puts generator.portrait()
-puts generator.landscape()
+puts generator.portrait( 'indent' => "\t" )
+puts generator.landscape( 'encodes' => 1 )
 
+puts generator.generate( 'tgroups' => 1 )
+puts generator.generate( 'tgroups' => 2 )
+
+puts generator.generate( 'tr' => { 'class' => %w{ odd even } } )
 ```
 
 Installation
