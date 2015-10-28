@@ -132,13 +132,15 @@ module Spreadsheet
             end
 
             data  = []
-            empty = params.has_key?('empty') ? params['empty'] : '&nbsp'
+            empty = params.has_key?('empty') ? params['empty'] : '&nbsp;'
             tag   = ( params['matrix'] or params['headless'] ) ? 'td' : 'th'
 
             params['data'].each do |row|
                 r = []
                 row.each do |col|
-                    r.push( { 'tag' => tag, 'attr' => params[tag] || {}, 'cdata' => col.to_s } )
+                    col = col.to_s
+                    col = col.gsub( /^\s*$/, empty )
+                    r.push( { 'tag' => tag, 'attr' => params[tag] || {}, 'cdata' => col } )
                 end
                 data.push( r )
                 tag = 'td'
