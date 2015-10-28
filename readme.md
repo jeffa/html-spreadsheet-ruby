@@ -11,7 +11,7 @@ Synopsis
 ```ruby
 require 'Spreadsheet/HTML'
 
-data = Array[ [1,2,3], [4,5,6] ]
+data = Array[ [1,2,3], [4,5,6], [7,8,9] ]
 generator = Spreadsheet::HTML.new()
 puts generator.generate( data )
 puts generator.generate( 'data' => data )
