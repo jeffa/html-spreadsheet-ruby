@@ -90,6 +90,10 @@ flip
     Flips the table horizontally from the perspective of the headings "row" by
     negating the value of theta.
 
+pinhead
+    Works in conjunction with theta to ensure reporting readability. Without it, south() and east()
+    would have data cells arranged in reverse order.
+
 == Dynamic Parameters
     There currently are no Dynamic Parameters, but they will be implemented soon enough.
     They will allow the client to modify headings by name and row/columns by their indices.
