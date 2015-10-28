@@ -1,0 +1,137 @@
+== Description
+    Just another HTML table generator for ruby.
+    Generate HTML tables with ease (HTML4, XHTML and HTML5).
+    Generate portrait, landscape and other rotated views. Handles
+    rotating table attributes via HTML-AutoTag.
+
+== Installation
+
+    gem install Spreadsheet-HTML
+
+== Synopsis
+    require 'Spreadsheet/HTML'
+
+    data = Array[ [1,2,3], [4,5,6] ]
+    generator = Spreadsheet::HTML.new()
+    puts generator.generate( data )
+    puts generator.generate( 'data' => data )
+
+    generator = Spreadsheet::HTML.new( 'data' => data )
+    puts generator.portrait( 'indent' => "\t" )
+    puts generator.landscape( 'encodes' => 1 )
+
+    puts generator.generate( 'tgroups' => 1 )
+    puts generator.generate( 'tgroups' => 2 )
+
+    puts generator.generate( 'tr' => { 'class' => %w{ odd even } } )
+
+    # See t/ directory for more examples
+
+== Methods
+    With the exception of new, all methods return an HTML table as a string.
+
+new( params )
+    Constructs a new generator configured with given params. These params will be used
+    for each call to a generator method. Any params specified in the constructor
+    may be overriden in a subsequent call to a generator method (which are listed next).
+
+generate( params )
+portrait( params )
+north( params )
+    These three methods all generate an HTML table with headings positioned at the top.
+
+landscape( params )
+west( params )
+    These two methods generate an HTML table with headings positioned at the left.
+    
+south( params )
+    This method generates an HTML table with headings positioned at the bottom.
+
+east( params )
+    This method generates an HTML table with headings positioned at the right.
+
+== Literal Parameters
+    Literal Parameters provides the means to modify the macro aspects of the table,
+    such as indentation, encoding, data source and table orientation.
+
+data
+    The data to be rendered as an HTML table. Array of Arrays.
+
+tgroups
+    Integer (0, 1 or 2). Group table rows into <thead>, <tbody> and <tfoot> sections.
+    When tgroups is set to 1, the <tfoot> section is omitted. The last row of the data
+    is found at the end of the <tbody> section instead. (loose) When tgroups is set to 2,
+    the <tfoot> section is found in between the <thead> and <tbody> sections. (strict)
+
+indent
+    The string to indent each row by. Defaults to undefined which produces no indentation.
+    Automatically adds newlines when set to any defined value.
+
+level
+    Positive integer. The level to start indentation at. This is useful for matching the nesting styles of
+    original HTML text that you may wish in insert into. (A value of 4 says "apply the repitition operator
+    to the value of indent 4 times.)
+
+empty
+    String. Render any empty cells with this value. Defaults to &nbps; 
+
+matrix
+    Boolean. Render the headings row with only <td> tags, no <th> tags.
+
+headless
+    Boolean. Render the table without the headings row at all.
+
+theta
+    Rotates table clockwise for positive values and counter-clockwise for negative values.
+    Default is 0: headings at top. 90 yields headings at right, 180 yields headings at bottom.
+    270 yields headings at left. To achieve landscape, use -270.
+
+flip
+    Flips the table horizontally from the perspective of the headings "row" by
+    negating the value of theta.
+
+== Dynamic Parameters
+    There currently are no Dynamic Parameters, but they will be implemented soon enough.
+    They will allow the client to modify headings by name and row/columns by their indices.
+
+== Tag Parameters
+    Tag Parameters provide a means to control the attributes of the table's tags, and in
+    the case of <th> and <td> the contents via callback subroutines (TODO!). Although
+    similar in form, they are differentiated from litertal parameters because they share
+    the names of the actual HTML table tags.
+
+table
+thead
+tfoot
+tbody
+tr
+    Hash. Apply these attributes to the specified tag.
+
+th
+td
+    <th> and <td> will be the only Tag Parameters that accept callback methods, but this is still TODO.
+    In the meantime they behave the same as other Tag Parameters.
+
+thead.tr
+    When tgroups is 1 or 2, this tag parameter is available to control the attributes of
+    the <tr> tag within the <thead> group.
+
+tfoot.tr
+    When tgroups is 2, this tag parameter is available to control the attributes of
+    the <tr> tag within the <tfoot> group.
+
+== License
+    MIT
+
+== Copyright
+   (C) 2015 Jeff Anderson
+   All Rights Reserved
+
+== Warranty
+   This package is provided "as is" and without any express or
+   implied warranties, including, without limitation, the implied
+   warranties of merchantability and fitness for a particular purpose.
+
+== Author
+    Jeff Anderson
+    jeffa@cpan.org
