@@ -78,8 +78,8 @@ empty
     String. Render any empty cells with this value. Defaults to &nbps; 
 
 encodes
-    Boolean. Uses htmlentities rubygem to encode any HTML entities found in a cell's data.
-    (TODO: this value will be a string containing the characters to HTML encode.)
+    String. Encode HTML entities. Pass empty string for default HTML entity encoding
+    or a string with chars you want encoded.
 
 matrix
     Boolean. Render the headings row with only <td> tags, no <th> tags.
