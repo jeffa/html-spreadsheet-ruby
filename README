@@ -27,7 +27,7 @@
     # See t/ directory for more examples
 
 == Dependencies
-    HTML-AutoTag (which requires htmlentities)
+    HTML-AutoTag
 
 == Methods
     With the exception of new, all methods return an HTML table as a string.
