@@ -136,6 +136,12 @@ module Spreadsheet
             tag   = ( params['matrix'] or params['headless'] ) ? 'td' : 'th'
 
             params['data'].each do |row|
+
+                unless params['_layout']
+                    (params['_max_cols'] - row.size).times { row.push( nil ) }  # pad
+                    (row.size - params['_max_cols']).times { row.pop }          # truncate
+                end
+
                 r = []
                 row.each do |col|
                     col = col.to_s
@@ -196,7 +202,9 @@ module Spreadsheet
                 params['data'] = data[0]
             end
 
-            params['data'] = params['data'].clone
+            params['_max_rows'] = params['data'].size
+            params['_max_cols'] = params['data'][0].size
+            params['data']      = params['data'].clone
 
             return params
         end
