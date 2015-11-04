@@ -28,14 +28,14 @@ class Test_Encodes < Test::Unit::TestCase
     assert_equal(
         '<table><tr><th>header1</th><th>header2</th><th>header3</th></tr><tr><td><foo1></td><td>&amp;bar1</td><td>"baz1</td></tr><tr><td><foo2></td><td>&amp;bar2</td><td>"baz2</td></tr></table>',
         gen.generate( 'encodes' => '&' ),
-        "requested chars are encoded"
+        "only requested char is encoded"
     )
 
-#    assert_equal(
-#        '<table><tr><th>header1</th><th>header2</th><th>header3</th></tr><tr><td><foo1></td><td>&amp;bar1</td><td>"baz1</td></tr><tr><td><foo2></td><td>&amp;bar2</td><td>"baz2</td></tr></table>',
-#        gen.generate( 'encodes' => 'a&' ),
-#        "requested chars are encoded"
-#    )
+    assert_equal(
+        '<table><tr><th>he&#97;der1</th><th>he&#97;der2</th><th>he&#97;der3</th></tr><tr><td><foo1></td><td>&amp;b&#97;r1</td><td>&quot;b&#97;z1</td></tr><tr><td><foo2></td><td>&amp;b&#97;r2</td><td>&quot;b&#97;z2</td></tr></table>',
+        gen.generate( 'encodes' => 'a&"' ),
+        "requested chars are encoded"
+    )
 
   end
 
