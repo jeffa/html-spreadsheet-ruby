@@ -1,13 +1,13 @@
 require "Spreadsheet/HTML/version"
 require "HTML/AutoTag"
 
-# i cannot hasa instantiate HTML::AutoTag inside Spreadsheet::HTML?!?
+# i cannot instantiate any HTML::foo inside any bar::HTML?!?
 module Auto
     class Tag < HTML::AutoTag
     end
 end
-module Encoder
-    class Foo < HTML::Encoder
+module Enco
+    class Der < HTML::Encoder
     end
 end
 
@@ -139,7 +139,7 @@ module Spreadsheet
             empty = params.has_key?('empty') ? params['empty'] : '&nbsp;'
             tag   = ( params['matrix'] or params['headless'] ) ? 'td' : 'th'
 
-            encoder = Encoder::Foo.new
+            encoder = Enco::Der.new
             params['data'].each do |row|
 
                 unless params['_layout']
