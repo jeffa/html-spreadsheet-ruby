@@ -17,7 +17,7 @@
 
     generator = Spreadsheet::HTML.new( 'data' => data )
     puts generator.portrait( 'indent' => "\t" )
-    puts generator.landscape( 'encodes' => 1 )
+    puts generator.landscape( 'encode' => 1 )
 
     puts generator.generate( 'tgroups' => 1 )
     puts generator.generate( 'tgroups' => 2 )
@@ -77,9 +77,12 @@ level
 empty
     String. Render any empty cells with this value. Defaults to &nbps; 
 
+encode
+    Boolean. Whether or not to Encode entities.
+
 encodes
-    String. Encode HTML entities. Pass empty string for default HTML entity encoding
-    or a string with chars you want encoded.
+    String. Encode these HTML entities. Pass string with chars you want encoded
+    or leave blank for default control and high bit chars and <>!'"
 
 matrix
     Boolean. Render the headings row with only <td> tags, no <th> tags.

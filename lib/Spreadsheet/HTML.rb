@@ -6,6 +6,10 @@ module Auto
     class Tag < HTML::AutoTag
     end
 end
+module Encoder
+    class Foo < HTML::Encoder
+    end
+end
 
 module Spreadsheet
     class HTML
@@ -135,6 +139,7 @@ module Spreadsheet
             empty = params.has_key?('empty') ? params['empty'] : '&nbsp;'
             tag   = ( params['matrix'] or params['headless'] ) ? 'td' : 'th'
 
+            encoder = Encoder::Foo.new
             params['data'].each do |row|
 
                 unless params['_layout']
@@ -145,6 +150,9 @@ module Spreadsheet
                 r = []
                 row.each do |col|
                     col = col.to_s
+                    if params['encode'] or !params['encodes'].to_s.empty?
+                        col = encoder.encode( col, params['encodes'] )
+                    end
                     col = col.gsub( /^\s*$/, empty )
                     r.push( { 'tag' => tag, 'attr' => params[tag], 'cdata' => col } )
                 end
@@ -191,7 +199,8 @@ module Spreadsheet
             end
 
             params['auto'] = Auto::Tag.new(
-                'encodes'   => params.has_key?('encodes') ? params['encodes'] : '',
+                #'encode'    => params['encode'],
+                #'encodes'   => params['encodes'],
                 'indent'    => params['indent'],
                 'level'     => params['level'],
                 'sorted'    => params['attr_sort'],

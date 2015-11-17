@@ -1,6 +1,7 @@
 Revision history for html-autotag-ruby
 
 0.0.8
+    - "defactored" HTML Encoding into this module
     - refactored out default {} for attrs (HTML::AutoAttr handles them)
 
 0.0.7
