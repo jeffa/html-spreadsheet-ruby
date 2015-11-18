@@ -132,36 +132,45 @@ module Spreadsheet
 
             index = {}
             if params['data'][0].size()
+                # %index = map { '-' . ($data->[0][$_] || '') => $_ } 0 .. $#{ $data->[0] };
+                # for (grep /^-/, keys %$args) {
+                #     $args->{"-c$index{$_}" } = $args->{$_} if exists $index{$_};
+                # }
             end
 
-            data  = params['data']
             empty = params['empty'] || '&nbsp;'
             tag   = ( params['matrix'] or params['headless'] ) ? 'td' : 'th'
 
             encoder = Enco::Der.new
-            for i in 0 .. params['_max_rows'] - 1
+            for r in 0 .. params['_max_rows'] - 1
 
-                data[i] ||= []
                 unless params['_layout']
-                    (params['_max_cols'] - data[i].size).times { data[i].push( nil ) }  # pad
-                    (data[i].size - params['_max_cols']).times { data[i].pop }          # truncate
+                    params['data'][r] ||= []
+                    (params['_max_cols'] - params['data'][r].size).times { params['data'][r].push( nil ) }  # pad
+                    (params['data'][r].size - params['_max_cols']).times { params['data'][r].pop }          # truncate
                 end
 
-                r = []
-                data[i].each do |col|
+                row = []
+                for c in 0 .. params['_max_cols'] - 1
 
-                    col = col.to_s
-                    col = encoder.encode( col, params['encodes'] ) if params['encode'] or !params['encodes'].to_s.empty?
-                    col = col.gsub( /^\s*$/, empty.to_s )
-                    r.push( { 'tag' => tag, 'attr' => params[tag], 'cdata' => col } )
+                    attr  = params[tag]
+                    cdata = params['data'][r][c].to_s
+
+                    # for ($tag, "-c$col", "-r$row", "-r${row}c${col}") {
+                    #    next unless exists $args->{$_};
+                    #     ( $cdata, $attr ) = _extrapolate( $cdata, $attr, $args->{$_} );
+                    # }
+
+                    cdata = encoder.encode( cdata, params['encodes'] ) if params['encode'] or !params['encodes'].to_s.empty?
+                    cdata = cdata.gsub( /^\s*$/, empty.to_s )
+                    row.push( { 'tag' => tag, 'attr' => attr, 'cdata' => cdata } )
 
                 end
 
-                data[i] = r
+                params['data'][r] = row
                 tag = 'td'
             end
 
-            params['data'] = data
             params['data'].shift if params['headless']
 
             return params
