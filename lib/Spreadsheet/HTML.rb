@@ -216,8 +216,10 @@ module Spreadsheet
 
             if params['fill']
                 (row,col) = params['fill'].split(/\D/)    
-                params['_max_rows'] = row.to_i if row.to_i > params['_max_rows']
-                params['_max_cols'] = col.to_i if col.to_i > params['_max_cols']
+                if row.to_i > 0 && col.to_i > 0
+                    params['_max_rows'] = row.to_i if row.to_i > params['_max_rows']
+                    params['_max_cols'] = col.to_i if col.to_i > params['_max_cols']
+                end
             end
 
             return params

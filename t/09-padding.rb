@@ -51,8 +51,32 @@ class Test_Padding < Test::Unit::TestCase
 
     assert_equal(
         '<table><tr><th>&nbsp;</th></tr></table>',
+        gen.generate( 'fill' => nil ),
+        "fill defaults to 1x1 with with invalid data (nil)"
+    )
+
+    assert_equal(
+        '<table><tr><th>&nbsp;</th></tr></table>',
+        gen.generate( 'fill' => '' ),
+        "fill defaults to 1x1 with with invalid data (empty)"
+    )
+
+    assert_equal(
+        '<table><tr><th>&nbsp;</th></tr></table>',
         gen.generate( 'fill' => '0x0' ),
         "fill defaults to 1x1 with with invalid data (zero)"
+    )
+
+    assert_equal(
+        '<table><tr><th>&nbsp;</th></tr></table>',
+        gen.generate( 'fill' => '-2x4' ),
+        "fill defaults to 1x1 with with invalid data (first negative)"
+    )
+
+    assert_equal(
+        '<table><tr><th>&nbsp;</th></tr></table>',
+        gen.generate( 'fill' => '1x-3' ),
+        "fill defaults to 1x1 with with invalid data (second negative)"
     )
 
     assert_equal(
