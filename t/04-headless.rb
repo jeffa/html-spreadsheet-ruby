@@ -40,6 +40,12 @@ class Test_Headless < Test::Unit::TestCase
         "one named arg"
     )
 
+    assert_equal(
+        '<table><tr><th>1</th><th>a</th></tr><tr><td>2</td><td>b</td></tr><tr><td>3</td><td>c</td></tr></table>',
+        gen.generate( 'data' => data ),
+        "headless does not change orig data"
+    )
+
   end
 
   def test_class
