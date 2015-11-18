@@ -132,11 +132,10 @@ module Spreadsheet
 
             index = {}
             if params['data'][0].size()
-                # implement index mapping
             end
 
             data  = params['data']
-            empty = params.has_key?('empty') ? params['empty'] : '&nbsp;'
+            empty = params['empty'] || '&nbsp;'
             tag   = ( params['matrix'] or params['headless'] ) ? 'td' : 'th'
 
             encoder = Enco::Der.new
@@ -150,11 +149,14 @@ module Spreadsheet
 
                 r = []
                 data[i].each do |col|
+
                     col = col.to_s
                     col = encoder.encode( col, params['encodes'] ) if params['encode'] or !params['encodes'].to_s.empty?
-                    col = col.gsub( /^\s*$/, empty )
+                    col = col.gsub( /^\s*$/, empty.to_s )
                     r.push( { 'tag' => tag, 'attr' => params[tag], 'cdata' => col } )
+
                 end
+
                 data[i] = r
                 tag = 'td'
             end
