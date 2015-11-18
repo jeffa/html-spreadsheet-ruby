@@ -153,13 +153,14 @@ module Spreadsheet
                 row = []
                 for c in 0 .. params['_max_cols'] - 1
 
-                    attr  = params[tag]
+                    attr  = params[tag] || {}
                     cdata = params['data'][r][c].to_s
 
-                    # for ($tag, "-c$col", "-r$row", "-r${row}c${col}") {
-                    #    next unless exists $args->{$_};
-                    #     ( $cdata, $attr ) = _extrapolate( $cdata, $attr, $args->{$_} );
-                    # }
+                    [ tag, "_c#{c}", "_r#{r}", "_r#{r}c#{c}" ].each do |dyna_param|
+                        if params.has_key?( dyna_param )
+                            ( cdata, attr ) = _extrapolate( cdata, attr, params[dyna_param] );
+                        end
+                    end 
 
                     cdata = encoder.encode( cdata, params['encodes'] ) if params['encode'] or !params['encodes'].to_s.empty?
                     cdata = cdata.gsub( /^\s*$/, empty.to_s )
@@ -234,6 +235,24 @@ module Spreadsheet
             end
 
             return params
+        end
+
+        def _extrapolate( cdata, orig_attr, thingy )
+            new_attr = {}
+            thingy = [ thingy ] unless thingy.kind_of?(Array)
+            thingy.each do |t|
+                if t.kind_of?(Hash)
+                    new_attr = t
+                #elsif t.kind_of?(Code)
+                #    puts "What now?"
+                end
+            end
+
+            attr = {}
+            orig_attr.each { |key,val| attr[key] = val }
+            new_attr.each  { |key,val| attr[key] = val }
+
+            return [ cdata, attr ]
         end
 
     end

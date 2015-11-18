@@ -109,8 +109,18 @@ fill
   fill => '8x12' # 8 rows, 12 columns
 
 == Dynamic Parameters
-    There currently are no Dynamic Parameters, but they will be implemented soon enough.
-    They will allow the client to modify headings by name and row/columns by their indices.
+    Dynamic parameters provide a means to control the micro elements of the table,
+    such as modifying headings by their name and rows and columns by their indices.
+    They contain leading underscores to seperate them from literal and tag parameters.
+
+_rX
+    Hash. Apply these attributes to row X (zero index based).
+
+_cX
+    Hash. Apply these attributes to colum X (zero index based).
+
+_rXcY
+    Hash. Apply these attributes to colum Y in row X (zero index based).
 
 == Tag Parameters
     Tag Parameters provide a means to control the attributes of the table's tags, and in

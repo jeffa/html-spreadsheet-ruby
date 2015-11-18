@@ -181,4 +181,69 @@ class Test_Attributes < Test::Unit::TestCase
     )
 
   end
+
+  def test_dynamic_params
+
+    data = Array[
+        %w(header1 header2 header3),
+        %w(foo1 bar1 baz1),
+        %w(foo2 bar2 baz2),
+    ]
+
+    html = '<table><tr><th>header1</th><th style="color: red;">header2</th><th>header3</th></tr><tr><td>foo1</td><td style="color: green;">bar1</td><td>baz1</td></tr><tr><td>foo2</td><td style="color: blue;">bar2</td><td>baz2</td></tr></table>';
+
+    assert_equal(
+        html,
+        Spreadsheet::HTML.new( 'data' => data, '_c1' => { 'style' => { 'color' => %w{ red green blue } } } ).generate(),
+        "_c1 via constructor only"
+    )
+    assert_equal(
+        html,
+        Spreadsheet::HTML.new().generate( 'data' => data, '_c1' => { 'style' => { 'color' => %w{ red green blue } } } ),
+        "_c1 via method only"
+    )
+    assert_equal(
+        html,
+        Spreadsheet::HTML.new( 'data' => data ).generate( '_c1' => { 'style' => { 'color' => %w{ red green blue } } } ),
+        "_c1 via constructor and method"
+    )
+
+    html = '<table><tr><th>header1</th><th>header2</th><th>header3</th></tr><tr><td style="color: red;">foo1</td><td style="color: green;">bar1</td><td style="color: blue;">baz1</td></tr><tr><td>foo2</td><td>bar2</td><td>baz2</td></tr></table>';
+
+    assert_equal(
+        html,
+        Spreadsheet::HTML.new( 'data' => data, '_r1' => { 'style' => { 'color' => %w{ red green blue } } } ).generate(),
+        "_r1 via constructor only"
+    )
+    assert_equal(
+        html,
+        Spreadsheet::HTML.new().generate( 'data' => data, '_r1' => { 'style' => { 'color' => %w{ red green blue } } } ),
+        "_r1 via method only"
+    )
+    assert_equal(
+        html,
+        Spreadsheet::HTML.new( 'data' => data ).generate( '_r1' => { 'style' => { 'color' => %w{ red green blue } } } ),
+        "_r1 via constructor and method"
+    )
+
+    html = '<table><tr><th>header1</th><th>header2</th><th>header3</th></tr><tr><td>foo1</td><td>bar1</td><td style="color: red;">baz1</td></tr><tr><td>foo2</td><td>bar2</td><td>baz2</td></tr></table>';
+
+    assert_equal(
+        html,
+        Spreadsheet::HTML.new( 'data' => data, '_r1c2' => { 'style' => { 'color' => %w{ red green blue } } } ).generate(),
+        "_r1c2 via constructor only"
+    )
+    assert_equal(
+        html,
+        Spreadsheet::HTML.new().generate( 'data' => data, '_r1c2' => { 'style' => { 'color' => %w{ red green blue } } } ),
+        "_r1c2 via method only"
+    )
+    assert_equal(
+        html,
+        Spreadsheet::HTML.new( 'data' => data ).generate( '_r1c2' => { 'style' => { 'color' => %w{ red green blue } } } ),
+        "_r1c2 via constructor and method"
+    )
+
+  end
+
 end
