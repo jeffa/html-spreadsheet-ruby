@@ -1,5 +1,7 @@
 Revision history for html-autotag-ruby
 
+0.0.9
+
 0.0.8
     - implemented fill param
     - "defactored" HTML Encoding into this module
