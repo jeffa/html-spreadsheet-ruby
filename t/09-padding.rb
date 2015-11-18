@@ -50,6 +50,12 @@ class Test_Padding < Test::Unit::TestCase
     )
 
     assert_equal(
+        '<table><tr><th>header1</th><th>header2</th></tr><tr><td>foo1</td><td>bar1</td></tr><tr><td>foo2</td><td>bar2</td></tr></table>',
+        gen.generate( 'fill' => '1x2', 'data' => data ),
+        "fill does not truncate larger data"
+    )
+
+    assert_equal(
         '<table><tr><th>&nbsp;</th></tr></table>',
         gen.generate( 'fill' => nil ),
         "fill defaults to 1x1 with with invalid data (nil)"
