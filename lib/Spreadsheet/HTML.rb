@@ -135,28 +135,27 @@ module Spreadsheet
                 # implement index mapping
             end
 
-            data  = []
+            data  = params['data']
             empty = params.has_key?('empty') ? params['empty'] : '&nbsp;'
             tag   = ( params['matrix'] or params['headless'] ) ? 'td' : 'th'
 
             encoder = Enco::Der.new
-            params['data'].each do |row|
+            for i in 0 .. params['_max_rows'] - 1
 
+                data[i] ||= []
                 unless params['_layout']
-                    (params['_max_cols'] - row.size).times { row.push( nil ) }  # pad
-                    (row.size - params['_max_cols']).times { row.pop }          # truncate
+                    (params['_max_cols'] - data[i].size).times { data[i].push( nil ) }  # pad
+                    (data[i].size - params['_max_cols']).times { data[i].pop }          # truncate
                 end
 
                 r = []
-                row.each do |col|
+                data[i].each do |col|
                     col = col.to_s
-                    if params['encode'] or !params['encodes'].to_s.empty?
-                        col = encoder.encode( col, params['encodes'] )
-                    end
+                    col = encoder.encode( col, params['encodes'] ) if params['encode'] or !params['encodes'].to_s.empty?
                     col = col.gsub( /^\s*$/, empty )
                     r.push( { 'tag' => tag, 'attr' => params[tag], 'cdata' => col } )
                 end
-                data.push( r )
+                data[i] = r
                 tag = 'td'
             end
 
@@ -199,8 +198,6 @@ module Spreadsheet
             end
 
             params['auto'] = Auto::Tag.new(
-                #'encode'    => params['encode'],
-                #'encodes'   => params['encodes'],
                 'indent'    => params['indent'],
                 'level'     => params['level'],
                 'sorted'    => params['attr_sort'],
@@ -211,9 +208,17 @@ module Spreadsheet
                 params['data'] = data[0]
             end
 
-            params['_max_rows'] = params['data'].size
-            params['_max_cols'] = params['data'][0].size
+            params['data'] = [ [ nil ] ] if params['data'].nil?
+
+            params['_max_rows'] = params['data'].size    || 1
+            params['_max_cols'] = params['data'][0].size || 1
             params['data']      = params['data'].clone
+
+            if params['fill']
+                (row,col) = params['fill'].split(/\D/)    
+                params['_max_rows'] = row.to_i if row.to_i > params['_max_rows']
+                params['_max_cols'] = col.to_i if col.to_i > params['_max_cols']
+            end
 
             return params
         end

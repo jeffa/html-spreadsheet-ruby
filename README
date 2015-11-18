@@ -103,6 +103,11 @@ pinhead
     Works in conjunction with theta to ensure reporting readability. Without it, south() and east()
     would have data cells arranged in reverse order.
 
+fill
+    Can be used instead of data to create a "blank" table or with data to pad rows and cells.
+
+  fill => '8x12' # 8 rows, 12 columns
+
 == Dynamic Parameters
     There currently are no Dynamic Parameters, but they will be implemented soon enough.
     They will allow the client to modify headings by name and row/columns by their indices.
