@@ -1,6 +1,6 @@
 Spreadsheet-HTML (ruby)
 =======================
-Just another HTML table generator for ruby.
+Just another HTML table generator for ruby.  [![Gem Version](https://badge.fury.io/rb/Spreadsheet-HTML.svg)](https://badge.fury.io/rb/Spreadsheet-HTML)
 
 Description
 -----------
