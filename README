@@ -38,19 +38,25 @@ new( params )
     may be overriden in a subsequent call to a generator method (which are listed next).
 
 generate( params )
+    Generates an HTML table with headings positioned at the top.
+
 portrait( params )
+    Generates an HTML table with headings positioned at the top.
+
 north( params )
-    These three methods all generate an HTML table with headings positioned at the top.
+    Generates an HTML table with headings positioned at the top.
 
 landscape( params )
+    Generates an HTML table with headings positioned at the left.
+    
 west( params )
-    These two methods generate an HTML table with headings positioned at the left.
+    Generates an HTML table with headings positioned at the left.
     
 south( params )
-    This method generates an HTML table with headings positioned at the bottom.
+    Generates an HTML table with headings positioned at the bottom.
 
 east( params )
-    This method generates an HTML table with headings positioned at the right.
+    Generates an HTML table with headings positioned at the right.
 
 == Literal Parameters
     Literal Parameters provides the means to modify the macro aspects of the table,
@@ -59,99 +65,170 @@ east( params )
 data
     The data to be rendered as an HTML table. Array of Arrays.
 
+  'data' = > [ [ 1, 2, 3 ], [ 4, 5, 6 ], [7, 8, 9 ] ]
+
 tgroups
     Integer (0, 1 or 2). Group table rows into <thead>, <tbody> and <tfoot> sections.
     When tgroups is set to 1, the <tfoot> section is omitted. The last row of the data
     is found at the end of the <tbody> section instead. (loose) When tgroups is set to 2,
     the <tfoot> section is found in between the <thead> and <tbody> sections. (strict)
 
+  'tgroups' => 1
+  'tgroups' => 2
+
 indent
     The string to indent each row by. Defaults to undefined which produces no indentation.
     Automatically adds newlines when set to any defined value.
+
+  'indent' => '    '
+  'indent' => "\t"
 
 level
     Positive integer. The level to start indentation at. This is useful for matching the nesting styles of
     original HTML text that you may wish in insert into. (A value of 4 says "apply the repitition operator
     to the value of indent 4 times.)
 
+  'level' => 3
+
 empty
     String. Render any empty cells with this value. Defaults to &nbps; 
 
+  'empty' => ''
+
 encode
     Boolean. Whether or not to Encode entities.
+
+  'encode' => 1
 
 encodes
     String. Encode these HTML entities. Pass string with chars you want encoded
     or leave blank for default control and high bit chars and <>!'"
 
+  'encodes' => '<>'
+
 matrix
     Boolean. Render the headings row with only <td> tags, no <th> tags.
+
+  'matrix' => 1
 
 headless
     Boolean. Render the table without the headings row at all.
 
+  'headless' => 1
+
 theta
     Rotates table clockwise for positive values and counter-clockwise for negative values.
     Default is 0: headings at top. 90 yields headings at right, 180 yields headings at bottom.
-    270 yields headings at left. To achieve landscape, use -270.
+    270 yields headings at left. To achieve landscape, use -270 (or use the landscape() method).
+
+  'theta' => -270
 
 flip
     Flips the table horizontally from the perspective of the headings "row" by
     negating the value of theta.
 
+  'flip' => 1
+
 pinhead
     Works in conjunction with theta to ensure reporting readability. Without it, south() and east()
     would have data cells arranged in reverse order.
 
+  'pinhead' => 1
+
 fill
     Can be used instead of data to create a "blank" table or with data to pad rows and cells.
 
-  fill => '8x12' # 8 rows, 12 columns
+  'fill' => '8x12' # 8 rows, 12 columns
 
 == Dynamic Parameters
     Dynamic parameters provide a means to control the micro elements of the table,
     such as modifying headings by their name and rows and columns by their indices.
     They contain leading underscores to seperate them from literal and tag parameters.
+    They accepts Hashes for use as tag attributes, Procs or lambdas for altering the
+    CDATA of the cell, or Arrays that contain either (just like the 'td' and 'th' Tag
+    Parameters described below).
 
 _rX
-    Hash. Apply these attributes to row X (zero index based).
+    Apply these attributes to row X (zero index based).
+
+  '_r2' => { 'class' => 'third-row' }
+  '_r2' => lambda { |c| c.upcase }
+  '_r2' => [ lambda { |c| c.upcase }, { 'class' => 'third-row' } ]
 
 _cX
-    Hash. Apply these attributes to colum X (zero index based). You can also alias any
+    Apply these attributes to colum X (zero index based). You can also alias any
     column by the value of the heading name in that column prepended with underscore (_)
 
-  _occupation => { 'class' => 'foo' }
+  '_c4' => { 'class' => 'fifth-column' }
+  '_c4' => lambda { |c| c.upcase }
+  '_c4' => [ lambda { |c| c.upcase }, { 'class' => 'fifth-column' } ]
 
-  _salary => { 'class' => 'foo' }
+  '_occupation' => { 'class' => 'foo' }
+  '_salary' => lambda { |c| c.capitalize }
 
 _rXcY
-    Hash. Apply these attributes to colum Y in row X (zero index based).
+    Apply these attributes to colum Y in row X (zero index based).
+
+  '_r2c4' => { 'class' => 'third-row-fifth-column' }
+  '_r2c4' => lambda { |c| c.upcase }
+  '_r2c4' => [ lambda { |c| c.upcase }, { 'class' => 'third-row-fifth-column' } ]
 
 == Tag Parameters
     Tag Parameters provide a means to control the attributes of the table's tags, and in
-    the case of <th> and <td> the contents via callback subroutines (TODO!). Although
+    the case of <th> and <td> the contents via callback subroutines. Although
     similar in form, they are differentiated from litertal parameters because they share
     the names of the actual HTML table tags.
 
 table
+    Hash. Apply these attributes.
+
+  'table' => { 'class' => 'spreadsheet' }
+
 thead
+    Hash. Apply these attributes.
+
+  'thead' => { 'class' => 'headings' }
+
 tfoot
+    Hash. Apply these attributes.
+
+  'tfoot' => { 'class' => 'footings' }
+
 tbody
+    Hash. Apply these attributes.
+
+  'tbody' => { 'class' => 'bodyings' }
+
 tr
-    Hash. Apply these attributes to the specified tag.
+    Hash. Apply these attributes.
+
+  'tr => { 'class' => %w{ odd even } }
 
 th
+    <th> and <td> are the only Tag Parameters that also accept callback methods.
+
+  'th' => { 'style' => { 'color' => %w{ red green blue } } }
+  'th' => lambda { |c| c.upcase }
+  'th' => [ { 'style' => { 'color' => %w{ red green blue } }, lambda { |c| c.upcase } ]
+
 td
-    <th> and <td> will be the only Tag Parameters that accept callback methods, but this is still TODO.
-    In the meantime they behave the same as other Tag Parameters.
+    <th> and <td> are the only Tag Parameters that also accept callback methods.
+
+  'td' => { 'style' => { 'color' => %w{ red green blue } } }
+  'td' => lambda { |c| c.upcase }
+  'td' => [ { 'style' => { 'color' => %w{ red green blue } }, lambda { |c| c.upcase } ]
 
 thead.tr
     When tgroups is 1 or 2, this tag parameter is available to control the attributes of
     the <tr> tag within the <thead> group.
 
+  'thead.tr' => { 'class' => 'body-cell' }
+
 tfoot.tr
     When tgroups is 2, this tag parameter is available to control the attributes of
     the <tr> tag within the <tfoot> group.
+
+  'tbody.tr' => { 'class' => 'body-cell' }
 
 == License
     MIT

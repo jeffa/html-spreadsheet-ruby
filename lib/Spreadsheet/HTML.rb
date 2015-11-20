@@ -248,13 +248,13 @@ module Spreadsheet
             thingy.each do |t|
                 if t.kind_of?(Hash)
                     new_attr = t
-                #elsif t.kind_of?(Code)
-                #    puts "What now?"
+                elsif t.kind_of?(Proc)
+                    cdata = t.call( cdata )
                 end
             end
 
             attr = {}
-            orig_attr.each { |key,val| attr[key] = val }
+            orig_attr.each { |key,val| attr[key] = val } if orig_attr.kind_of?(Hash)
             new_attr.each  { |key,val| attr[key] = val }
 
             return [ cdata, attr ]
