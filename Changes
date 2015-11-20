@@ -1,5 +1,7 @@
 Revision history for html-autotag-ruby
 
+0.0.10
+
 0.0.9
     - implemented Dynamic Tags by headings
     - handle invalid fill params more gracefully
