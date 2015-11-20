@@ -92,6 +92,7 @@ class Test_Attributes < Test::Unit::TestCase
     )
 
   end 
+
   def test_th
 
     data = Array[
@@ -117,6 +118,36 @@ class Test_Attributes < Test::Unit::TestCase
     assert_equal(
         html,
         Spreadsheet::HTML.new( 'data' => data ).generate( 'th' => { 'class' => 'heading' } ),
+        "via constructor and method"
+    )
+
+  end 
+
+  def test_th_rotate
+
+    data = Array[
+        %w(header1 header2 header3 header4),
+        %w(foo1 bar1 baz1 qux1),
+        %w(foo2 bar2 baz2 qux2),
+        %w(foo3 bar3 baz3 qux3),
+        %w(foo4 bar4 baz4 qux4)
+    ]
+
+    html = '<table><tr><th class="h1">header1</th><th class="h2">header2</th><th class="h3">header3</th><th class="h4">header4</th></tr><tr><td>foo1</td><td>bar1</td><td>baz1</td><td>qux1</td></tr><tr><td>foo2</td><td>bar2</td><td>baz2</td><td>qux2</td></tr><tr><td>foo3</td><td>bar3</td><td>baz3</td><td>qux3</td></tr><tr><td>foo4</td><td>bar4</td><td>baz4</td><td>qux4</td></tr></table>'
+
+    assert_equal(
+        html,
+        Spreadsheet::HTML.new( 'data' => data, 'th' => { 'class' => %w{ h1 h2 h3 h4 } } ).generate(),
+        "via constructor only"
+    )
+    assert_equal(
+        html,
+        Spreadsheet::HTML.new().generate( 'data' => data, 'th' => { 'class' => %w{ h1 h2 h3 h4 } } ),
+        "via method only"
+    )
+    assert_equal(
+        html,
+        Spreadsheet::HTML.new( 'data' => data ).generate( 'th' => { 'class' => %w{ h1 h2 h3 h4 } } ),
         "via constructor and method"
     )
 
