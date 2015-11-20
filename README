@@ -117,7 +117,12 @@ _rX
     Hash. Apply these attributes to row X (zero index based).
 
 _cX
-    Hash. Apply these attributes to colum X (zero index based).
+    Hash. Apply these attributes to colum X (zero index based). You can also alias any
+    column by the value of the heading name in that column prepended with underscore (_)
+
+  _occupation => { 'class' => 'foo' }
+
+  _salary => { 'class' => 'foo' }
 
 _rXcY
     Hash. Apply these attributes to colum Y in row X (zero index based).

@@ -127,15 +127,20 @@ module Spreadsheet
         def _process( args )
             params = _args( args )
 
-            # headings is an alias for -r0
-            params['-r0'] = params['headings']
+            # headings is an alias for _r0
+            params['_r0'] = params['headings']
 
             index = {}
             if params['data'][0].size()
-                # %index = map { '-' . ($data->[0][$_] || '') => $_ } 0 .. $#{ $data->[0] };
-                # for (grep /^-/, keys %$args) {
-                #     $args->{"-c$index{$_}" } = $args->{$_} if exists $index{$_};
-                # }
+                for i in 0 .. params['data'][0].size() - 1
+                    key = params['data'][0][i] || ''
+                    index["_#{key}"] = i
+                end
+
+                params.keys.grep( /^_/ ) do |key|
+                    k = index[key] 
+                    params["_c#{k}"] = params[key] if index.has_key?( key )
+                end
             end
 
             empty = params['empty'] || '&nbsp;'
