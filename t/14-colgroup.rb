@@ -61,11 +61,11 @@ class Test_Colgroup < Test::Unit::TestCase
         "colgroup wraps col"
     )
 
-#    assert_equal(
-#        '<table><colgroup span="3" width="100"><col /><col /><col /></colgroup><tr><th>a</th><th>b</th><th>c</th></tr><tr><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td></tr></table>',
-#        gen.generate( 'col' => [{},{},{}] ),
-#        "colgroup wraps multiple cols"
-#    )
+    assert_equal(
+        '<table><colgroup span="3" width="100"><col /><col /><col /></colgroup><tr><th>a</th><th>b</th><th>c</th></tr><tr><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td></tr></table>',
+        gen.generate( 'col' => [{},{},{}] ),
+        "colgroup wraps multiple cols"
+    )
 
     assert_equal(
         '<table><colgroup><col /></colgroup><tr><th>a</th><th>b</th><th>c</th></tr><tr><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td></tr></table>',
@@ -76,11 +76,11 @@ class Test_Colgroup < Test::Unit::TestCase
 
     gen = Spreadsheet::HTML.new( 'data' => data, 'col' => Array[{},{},{}] );
 
-#    assert_equal(
-#        '<table><colgroup><col /><col /><col /></colgroup><tr><th>a</th><th>b</th><th>c</th></tr><tr><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td></tr></table>',
-#        gen.generate( 'colgroup' => {} ),
-#        "multiple cols against single colgroup"
-#    )
+    assert_equal(
+        '<table><colgroup><col /><col /><col /></colgroup><tr><th>a</th><th>b</th><th>c</th></tr><tr><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td></tr></table>',
+        gen.generate( 'colgroup' => {} ),
+        "multiple cols against single colgroup"
+    )
 
     assert_equal(
         '<table><colgroup /><colgroup /><colgroup /><tr><th>a</th><th>b</th><th>c</th></tr><tr><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td></tr></table>',

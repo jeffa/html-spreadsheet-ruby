@@ -264,12 +264,10 @@ module Spreadsheet
                         }
                     }
                 else
-                    colgroup = params['col'].map{ |cg| 
-                        {
-                            'tag'   => 'colgroup',
-                            'attr'  => params['colgroup'],
-                            'cdata' => params['col'].map{ |attr| { 'tag' => 'col', 'attr' => attr } }
-                        }
+                    colgroup = {
+                        'tag'   => 'colgroup',
+                        'attr'  => params['colgroup'],
+                        'cdata' => params['col'].map{ |attr| { 'tag' => 'col', 'attr' => attr } }
                     }
                 end
             else
@@ -279,41 +277,9 @@ module Spreadsheet
                 end
             end
 
+            colgroup = Array[colgroup] if colgroup.kind_of?(Hash)
             return colgroup
         end
-
-#sub _colgroup {
-#    my %args = @_;
-#
-#    my @colgroup;
-#    $args{col} = [ $args{col} ] if ref($args{col}) eq 'HASH';
-#
-#    if (ref($args{col}) eq 'ARRAY') {
-#
-#        if (ref $args{colgroup} eq 'ARRAY') {
-#            @colgroup = map {
-#                tag   => 'colgroup',
-#                attr  => $_,
-#                cdata => [ map { tag => 'col', attr => $_ }, @{ $args{col} } ]
-#            }, @{ $args{colgroup} }; 
-#        } else {
-#            @colgroup = {
-#                tag   => 'colgroup',
-#                attr  => $args{colgroup},
-#                cdata => [ map { tag => 'col', attr => $_ }, @{ $args{col} } ]
-#            }; 
-#        }
-#
-#    } else {
-#
-#        $args{colgroup} = [ $args{colgroup} ] if ref($args{colgroup}) eq 'HASH';
-#        if (ref $args{colgroup} eq 'ARRAY') {
-#            @colgroup = map { tag => 'colgroup', attr => $_ }, @{ $args{colgroup} };
-#        }
-#    }
-#
-#    return @colgroup;
-#}
 
         def _tag( tag, cdata )
             tag = { 'tag' => tag, 'cdata' => cdata }
