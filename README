@@ -140,6 +140,14 @@ fill
 
   'fill' => '8x12' # 8 rows, 12 columns
 
+caption
+    Caption is special in that you can either pass a string to be used as CDATA or a hash whose only
+    key is the string to be used as CDATA.
+
+  'caption' => 'Just Another Title'
+
+  'caption' => { 'A Title With Attributes' => { 'align' => 'bottom' } }
+
 == Dynamic Parameters
     Dynamic parameters provide a means to control the micro elements of the table,
     such as modifying headings by their name and rows and columns by their indices.

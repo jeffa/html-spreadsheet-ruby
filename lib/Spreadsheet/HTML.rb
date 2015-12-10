@@ -83,7 +83,10 @@ module Spreadsheet
         end
 
         def _make_table( params )
-            cdata = [] # TODO: insert caption and colgroup
+            cdata = Array[]
+            if params.has_key?( 'caption' )
+                cdata = Array[ _tag( 'caption', params['caption'] ) ]
+            end
 
             if params['tgroups'] && params['tgroups'] > 0
 
@@ -100,7 +103,7 @@ module Spreadsheet
                 cdata.push({ 'tag' => 'tbody', 'attr' => params['tbody'], 'cdata' => body_rows })
 
             else
-                cdata.push( params['data'].map { |c| { 'tag' => 'tr', 'attr' => params['tr'], 'cdata' => c } } )
+                cdata.concat( params['data'].map { |c| { 'tag' => 'tr', 'attr' => params['tr'], 'cdata' => c } } )
             end
 
             return params['auto'].tag( 'tag' => 'table', 'attr' => params['table'], 'cdata' => cdata )
@@ -240,6 +243,15 @@ module Spreadsheet
             new_attr.each  { |key,val| attr[key] = val }
 
             return [ cdata, attr ]
+        end
+
+        def _tag( tag, cdata )
+            tag = { 'tag' => tag, 'cdata' => cdata }
+            if cdata.kind_of?( Hash )
+                tag['cdata'] = cdata.keys[0]
+                tag['attr']  = cdata.values[0]
+            end
+            return tag
         end
 
     end
