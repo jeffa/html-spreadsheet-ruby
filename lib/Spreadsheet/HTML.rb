@@ -84,8 +84,13 @@ module Spreadsheet
 
         def _make_table( params )
             cdata = Array[]
+
             if params.has_key?( 'caption' )
-                cdata = Array[ _tag( 'caption', params['caption'] ) ]
+                cdata.push( _tag( 'caption', params['caption'] ) )
+            end
+
+            if params.has_key?( 'colgroup' ) or params.has_key?( 'col' )
+                cdata.concat( _colgroup( params ) )
             end
 
             if params['tgroups'] && params['tgroups'] > 0
@@ -244,6 +249,71 @@ module Spreadsheet
 
             return [ cdata, attr ]
         end
+
+        def _colgroup( params )
+            colgroup = Array[]
+            params['col'] = Array[ params['col'] ] if params['col'].kind_of?(Hash)
+
+            if params['col'].kind_of?(Array)
+                if params['colgroup'].kind_of?(Array)
+                    colgroup = params['colgroup'].map{ |cg| 
+                        {
+                            'tag'   => 'colgroup',
+                            'attr'  => cg,
+                            'cdata' => params['col'].map{ |attr| { 'tag' => 'col', 'attr' => attr } }
+                        }
+                    }
+                else
+                    colgroup = params['col'].map{ |cg| 
+                        {
+                            'tag'   => 'colgroup',
+                            'attr'  => params['colgroup'],
+                            'cdata' => params['col'].map{ |attr| { 'tag' => 'col', 'attr' => attr } }
+                        }
+                    }
+                end
+            else
+                params['colgroup'] = Array[ params['colgroup'] ] if params['colgroup'].kind_of?(Hash)
+                if params['colgroup'].kind_of?(Array)
+                    colgroup = params['colgroup'].map{ |attr| { 'tag' => 'colgroup', 'attr' => attr } }
+                end
+            end
+
+            return colgroup
+        end
+
+#sub _colgroup {
+#    my %args = @_;
+#
+#    my @colgroup;
+#    $args{col} = [ $args{col} ] if ref($args{col}) eq 'HASH';
+#
+#    if (ref($args{col}) eq 'ARRAY') {
+#
+#        if (ref $args{colgroup} eq 'ARRAY') {
+#            @colgroup = map {
+#                tag   => 'colgroup',
+#                attr  => $_,
+#                cdata => [ map { tag => 'col', attr => $_ }, @{ $args{col} } ]
+#            }, @{ $args{colgroup} }; 
+#        } else {
+#            @colgroup = {
+#                tag   => 'colgroup',
+#                attr  => $args{colgroup},
+#                cdata => [ map { tag => 'col', attr => $_ }, @{ $args{col} } ]
+#            }; 
+#        }
+#
+#    } else {
+#
+#        $args{colgroup} = [ $args{colgroup} ] if ref($args{colgroup}) eq 'HASH';
+#        if (ref $args{colgroup} eq 'ARRAY') {
+#            @colgroup = map { tag => 'colgroup', attr => $_ }, @{ $args{colgroup} };
+#        }
+#    }
+#
+#    return @colgroup;
+#}
 
         def _tag( tag, cdata )
             tag = { 'tag' => tag, 'cdata' => cdata }
