@@ -140,14 +140,6 @@ fill
 
   'fill' => '8x12' # 8 rows, 12 columns
 
-caption
-    Caption is special in that you can either pass a string to be used as CDATA or a hash whose only
-    key is the string to be used as CDATA.
-
-  'caption' => 'Just Another Title'
-
-  'caption' => { 'A Title With Attributes' => { 'align' => 'bottom' } }
-
 == Dynamic Parameters
     Dynamic parameters provide a means to control the micro elements of the table,
     such as modifying headings by their name and rows and columns by their indices.
@@ -225,6 +217,28 @@ td
   'td' => { 'style' => { 'color' => %w{ red green blue } } }
   'td' => lambda { |c| c.upcase }
   'td' => [ { 'style' => { 'color' => %w{ red green blue } }, lambda { |c| c.upcase } ]
+
+caption
+    Caption is special in that you can either pass a string to be used as CDATA or a hash whose only
+    key is the string to be used as CDATA.
+
+  'caption' => 'Just Another Title'
+
+  'caption' => { 'A Title With Attributes' => { 'align' => 'bottom' } }
+
+colgroup
+    Add colgroup tag(s) to the table. Use an AoH for multiple.
+
+  colgroup => { 'span => '2', 'style' => { 'background-color' => 'orange' } }
+
+  colgroup => Array[ { 'span => '20' }, { 'span' => '1', 'class' => 'end' } ]
+
+col
+    Add col tag(s) to the table. Use an AoH for multiple. Wraps tags within a colgroup tag. Same usage as colgroup.
+
+  col => { 'span' => '2', 'style' => { 'background-color' => 'orange' } }
+
+  col => Array[ { 'span' => 20 }, { 'span' => '1', 'class' => 'end' } ]
 
 thead.tr
     When tgroups is 1 or 2, this tag parameter is available to control the attributes of

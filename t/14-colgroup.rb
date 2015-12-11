@@ -11,7 +11,7 @@ class Test_Colgroup < Test::Unit::TestCase
         %w( 4 5 6 ),
     ]
 
-    gen = Spreadsheet::HTML.new( 'data' => data, 'colgroup' => { 'span' => '3', 'width' => '100' }, 'attr_sort' => 1 );
+    gen = Spreadsheet::HTML.new( 'data' => data, 'colgroup' => { 'span' => 3, 'width' => 100 }, 'attr_sort' => 1 );
 
     assert_equal(
         '<table><colgroup span="3" width="100" /><tr><th>a</th><th>b</th><th>c</th></tr><tr><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td></tr></table>',
@@ -39,7 +39,7 @@ class Test_Colgroup < Test::Unit::TestCase
 
     assert_equal(
         '<table><colgroup color="red" span="1" /><colgroup color="blue" span="2" /><tr><th>a</th><th>b</th><th>c</th></tr><tr><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td></tr></table>',
-        gen.generate( 'colgroup' => [ { 'span' => '1', 'color' => 'red' }, { 'span' => '2', 'color' => 'blue' } ] ),
+        gen.generate( 'colgroup' => [ { 'span' => 1, 'color' => 'red' }, { 'span' => 2, 'color' => 'blue' } ] ),
         "can specify multiple colgroups"
     )
 
@@ -53,7 +53,7 @@ class Test_Colgroup < Test::Unit::TestCase
         %w( 4 5 6 ),
     ]
 
-    gen = Spreadsheet::HTML.new( 'data' => data, 'colgroup' => { 'span' => '3', 'width' => '100' }, 'attr_sort' => 1 );
+    gen = Spreadsheet::HTML.new( 'data' => data, 'colgroup' => { 'span' => 3, 'width' => 100 }, 'attr_sort' => 1 );
 
     assert_equal(
         '<table><colgroup span="3" width="100"><col /></colgroup><tr><th>a</th><th>b</th><th>c</th></tr><tr><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td><td>6</td></tr></table>',
