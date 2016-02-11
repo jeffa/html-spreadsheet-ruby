@@ -18,7 +18,7 @@ puts generator.generate( 'data' => data )
 
 generator = Spreadsheet::HTML.new( 'data' => data )
 puts generator.portrait( 'indent' => "\t" )
-puts generator.landscape( 'encodes' => 1 )
+puts generator.landscape( 'encode' => 1 )
 
 puts generator.generate( 'tgroups' => 1 )
 puts generator.generate( 'tgroups' => 2 )
