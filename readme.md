@@ -21,7 +21,7 @@ puts generator.portrait( 'encodes' => 1 )
 puts generator.landscape( 'encode' => 1 )
 
 puts generator.generate( 'tgroups' => 1 )
-puts generator.generate( 'tgroups' => 2 )
+puts generator.generate( 'tgroups' => 2, 'indent' => 'nil' )
 
 puts generator.generate( 'tr' => { 'class' => %w{ odd even } } )
 ```
