@@ -30,6 +30,10 @@ Installation
 ------------
 * gem install Spreadsheet-HTML
 
+Documentation
+-------------
+[http://www.rubydoc.info/gems/Spreadsheet-HTML/]
+
 License and Copyright
 ---------------------
 See [License](License.md).
