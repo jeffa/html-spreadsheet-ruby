@@ -96,6 +96,7 @@ module Spreadsheet
             if params['tgroups'] && params['tgroups'] > 0
 
                 body = params['data']
+                # TODO: is this a bug? data vs params['data']
                 head = body.shift() unless params['matrix'] && data.size() > 2
                 foot = body.pop() if !params['matrix'] && params['tgroups'] > 1 and data.size() > 2
 
