@@ -26,6 +26,8 @@ puts generator.generate( 'tgroups' => 2, 'indent' => 'nil' )
 puts generator.generate( 'tr' => { 'class' => %w{ odd even } } )
 ```
 
+[More documentation](http://www.rubydoc.info/gems/Spreadsheet-HTML) at `rubydoc.info`
+
 Installation
 ------------
 * gem install Spreadsheet-HTML
