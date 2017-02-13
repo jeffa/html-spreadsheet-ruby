@@ -30,7 +30,7 @@ puts generator.generate( 'tr' => { 'class' => %w{ odd even } } )
 
 Installation
 ------------
-* gem install Spreadsheet-HTML
+`gem install Spreadsheet-HTML`
 
 License and Copyright
 ---------------------
